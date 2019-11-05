@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<title>회원 정보</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -14,6 +14,9 @@
 		.bd-placeholder-img-lg {
 			font-size: 3.5rem;
 		}
+	}
+	.signUpForm{
+		width: 60%;
 	}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -26,9 +29,9 @@
 	<div class="container">
 		<div>
 		<h1>회원 정보 수정</h1>
-		<form action="${pageContext.request.contextPath}/UserServlet" method="post">
+		<form action="${pageContext.request.contextPath}/UserServlet" method="post" id="signUpForm">
 		<input type="hidden" name="command" value="modification">
-		<table class="table">
+		<table class="signUpTable">
 			<tr>
 				<th>아이디</th>
 				<td><input type="text" class="form-control" name="id" id="userId" readonly="readonly" value="${vo.id}"></td>

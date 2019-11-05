@@ -95,13 +95,14 @@
 						<li>
 							<div class="search">
 	                            <div class="search-wrap">
-	                                <span class="search-input-elm">
+	                            	<span class="search-input-elm">
 		                                <input class="search-input" type="text" placeholder="search.." />
-		                                <input class="btn btn-secondary search-submit" type="button" value="검색"/>
+		                                <button class="btn btn-secondary search-submit"><i class="fas fa-search"></i></button>
 	                                </span>
 	                                <span>
-	                                	<input class="btn btn-secondary search-btn" type="button" value="<i class="fas fa-search"></i>"/>
+	                                	<button class="btn btn-secondary search-btn">검색</button>
 	                                </span>
+		                            </div>
 	                            </div>
 	                        </div>
 						</li>
