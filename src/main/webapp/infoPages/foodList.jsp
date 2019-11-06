@@ -30,21 +30,14 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		<script type="text/javascript">
-		function forViewPage(code) {
-			//alert(code);
-			var path ="FoodServlet?command=view&code="+code;
-			//alert(path);
-			location.href=path;
-		}
-	
-	</script>
+
 	
 </head>
 <body>
-<!-- header -->
-<c:import url="../header.jsp"></c:import>
-<!-- header -->
+	<!-- header -->
+	<c:import url="${pageContext.request.contextPath}/header.jsp"></c:import>
+	<!-- header -->
+	
 	<section>
 		<article>
 			<div class="container">
@@ -56,67 +49,72 @@
 	
 	<div class="container">
 		<!-- <form class="form-inline" action="/action_page.php"> -->
-		<form class="form-inline" action="${pageContext.request.contextPath}/FoodServlet" method="get">
-		<input type="hidden" name="command" value="search">
-		<input type="hidden" name="location" value="infoPages/productInfo.jsp">
-		<label for="cate" class="mb-2 mr-sm-2">검색조건:</label>
-		<!-- <label for="sel1">Select list (select one):</label> -->
-      	<select class="form-control mb-2 mr-sm-2" id="cate" name="cate">
-        <option>상품명</option>
-        <option>제조사</option>
-        <option>원재료</option>
-      </select>
-	<!-- <input type="" class="form-control mb-2 mr-sm-2" id="email2" placeholder="Enter email" name="email"> -->
-		<label for="keyword" class="mb-2 mr-sm-2">검색단어:</label>
-		<input type="text" class="form-control mb-2 mr-sm-2" id="keyword" placeholder="검색단어" name="keyword">
-		<input type="submit" class="btn btn-primary mb-2" value="검색">
-		<!-- <button type="button" class="btn btn-primary mb-2" id="searchbutton">검색</button> -->
-	</form>
+		<form class="form-inline d-flex justify-content-center" id="foodSearch">
+			<input type="hidden" name="command" value="search">
+			<input type="hidden" name="location" value="index.jsp">
+			<label for="cate" class="mb-2 mr-sm-2">검색조건:</label>
+      		<select class="form-control mb-2 mr-sm-2" id="cate" name="cate">
+        		<option value="name">상품명</option>
+        		<option value="maker">제조사</option>
+        		<option value="material">원재료</option>
+      		</select>
+			<label for="keyword" class="mb-2 mr-sm-2">검색단어:</label>
+			<input type="text" class="form-control mb-2 mr-sm-2" id="keyword" placeholder="검색단어" name="keyword">
+			<input type="submit" class="btn btn-primary mb-2" value="검색">
+		</form>
 	</div>
 	
 		<!-- <button type="button" class="btn">Basic</button> -->
 	<div class="container-fuild" style="margin-top: 30px">
-		<div class="row">
-		<c:forEach items="${list }" var="item" varStatus="i">
-			
-				
-				<c:if test="${i.count % 2 == 1}">
-					<div class="col-sm-6 left">
-					<div class="info" onclick="forViewPage(${item.code})">
-						<img src="${pageContext.request.contextPath}/${item.img }" style="float:left; width:30%; height: 30%">
-						<article class="content" style="float: left; width: 70%">
-							${item.name }<br>
-							${item.maker }<br>
-							${item.material }		
-						</article>
-					</div>
-					</div>
-				</c:if>
-				
-				
-				<c:if test="${i.count % 2 == 0}">
-					<div class="col-sm-6 right">
-					<div class="info" onclick="forViewPage(${item.code})">
-						<img src="${pageContext.request.contextPath}/${item.img }" style="float:left; width:30%; height: 30%">
-						<article class="content" style="float: left; width: 70%">
-							${item.name }<br>
-							${item.maker }<br>
-							${item.material }		
-						</article>
-					</div>
-					</div>
-				</c:if> 
-				
-			
-		</c:forEach>
+		<div class="row" id="foodList">
+		
 		</div>
 	</div>
 			</div>
 		</article>
 	</section>
+	
 	<!-- Footer -->
-<c:import url="../footer.jsp"></c:import>
+	<c:import url="${pageContext.request.contextPath}/footer.jsp"></c:import>
 	<!-- Footer -->
 </body>
-
+<script type="text/javascript">
+	function forViewPage(code) {
+		//alert(code);
+		var path ="selectByCode/"+code;
+		//alert(path);
+		location.href=path;
+	}
+	$("#foodSearch").submit(function(){
+		let category = $("#cate").val();
+		let keyword = $("#keyword").val();
+		alert(category +"/"+ keyword);
+		$.ajax({
+			url : category+"/"+keyword,
+			type : "get",
+			success : function(resData) {
+				var str = "";
+				$("#foodList").empty();
+				if(resData!=null){
+					$.each(resData,function(idx,food){
+						if(idx%3==0){
+							str+='<div class="col-sm-4 left">';
+						}else if(idx%3==1){
+							str+='<div class="col-sm-4 mid">';
+						}else if(idx%3==2){
+							str+='<div class="col-sm-4 right">';
+						}
+						str+='<div class="info" onclick="forViewPage('+food.code+')">';
+						str+='<img src="'+food.img+'" style="width: 50%; height: 50%;">';
+						str+='<p class="text">'+food.name+'<br>'+food.maker+'</p>';
+						str+='</div></div>';
+					});//each
+				}
+			},
+			error : function() {
+				alert("조회 실패(시스템 오류)")
+			}
+		});
+	});
+</script>
 </html>

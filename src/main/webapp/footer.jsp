@@ -5,37 +5,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Footer</title>
-	<style type="text/css">
-	@media ( min-width : 1000px) {
-		.bd-placeholder-img-lg {
-			font-size: 3.5rem;
-		}
-	}
-	</style>
 </head>
 <body>
 	<footer class="page-footer font-small teal pt-4">
 		<!-- Footer Links -->
 		<div class="container text-center text-md-left">
-
 			<!-- Grid row -->
 			<div class="row">
-
 				<!-- Grid column -->
 				<div class="col-md-4 mx-auto">
-
 					<!-- Content -->
 					<h5 class="font-weight-bold text-uppercase mt-3 mb-4">사이트맵</h5>
 					<p> 이용자님들의 건강한 삶을 위해 항상 노력하겠습니다. </p>
-
 				</div>
-				<!-- Grid column -->
 
+				<!-- Grid column -->
 				<hr class="clearfix w-100 d-md-none">
 
 				<!-- Grid column -->
 				<div class="col-md-2 mx-auto">
-
 					<!-- Links -->
 					<h5 class="font-weight-bold text-uppercase mt-3 mb-4">회사소개</h5>
 
@@ -130,6 +118,5 @@
 			<!-- Copyright -->
 		</div>
 	</footer>
-
 </body>
 </html>
