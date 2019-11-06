@@ -4,11 +4,11 @@
 
 <mapper namespace="UserMapper">
 
-	<select id="select">
+	<sql id="select">
 		SELECT
 		id, pass, name, address, phone, allergy
 		FROM user
-	</select>
+	</sql>
 
 	<insert id="insertUser" parameterType="userVO">
 		INSERT INTO user (id, pass, name, address, phone, allergy)

@@ -35,4 +35,9 @@ public class FoodServiceImpl implements FoodService{
 		return dao.selectByFoodCode(code);
 	}
 
+	@Override
+	public List<FoodVO> selectAll() throws Exception {
+		return dao.selectAll();
+	}
+
 }

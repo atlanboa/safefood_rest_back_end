@@ -4,7 +4,7 @@
 
 <mapper namespace="FoodMapper">
 
-	<select id="select">
+	<sql id="select">
 		SELECT
 		code, name, supportpereat, calory, carbo,
 		protein, fat, sugar, natrium,
@@ -13,6 +13,10 @@
 		material, img, allergy
 		FROM
 		food
+	</sql>
+
+	<select id="selectAll" resultType="foodVO">
+		<include refid="select" />
 	</select>
 
 	<select id="selectByFoodName" parameterType="string"
@@ -31,13 +35,14 @@
 		<include refid="select" />
 		WHERE material LIKE '%${value}%'
 	</select>
-	
-	<select id="selectByFoodCode" parameterType="string" resultType="foodVO">
+
+	<select id="selectByFoodCode" parameterType="string"
+		resultType="foodVO">
 		<include refid="select" />
 		WHERE code = #{value}
 	</select>
-	
+
 	<insert id="insertFood" parameterType="foodVO">
-		
+
 	</insert>
 </mapper>

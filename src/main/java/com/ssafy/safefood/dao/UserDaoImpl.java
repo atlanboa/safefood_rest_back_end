@@ -1,9 +1,12 @@
 package com.ssafy.safefood.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssafy.safefood.vo.FoodVO;
 import com.ssafy.safefood.vo.UserVO;
 
 @Repository
@@ -33,5 +36,6 @@ public class UserDaoImpl implements UserDao{
 	public UserVO login(UserVO user) throws Exception {
 		return session.selectOne(ns+"login", user);		
 	}
+
 	
 }

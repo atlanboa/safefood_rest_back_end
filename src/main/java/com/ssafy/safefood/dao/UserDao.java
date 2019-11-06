@@ -1,6 +1,9 @@
 package com.ssafy.safefood.dao;
 
 
+import java.util.List;
+
+import com.ssafy.safefood.vo.FoodVO;
 import com.ssafy.safefood.vo.UserVO;
 
 public interface UserDao {

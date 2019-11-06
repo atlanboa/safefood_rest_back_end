@@ -45,6 +45,12 @@ public class FoodDaoImpl implements FoodDao {
 		return session.selectOne(ns+"selectByFoodCode", code);
 	}
 
+	@Override
+	public List<FoodVO> selectAll() throws Exception {
+
+		return session.selectList(ns+"selectAll");
+	}
+
 	
 	
 }
