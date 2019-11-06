@@ -9,7 +9,7 @@
 		<package name="com.ssafy.safefood.vo"/>
 	</typeAliases>
 	<mappers>
-		<mapper resource="mybatis-foodservice-mapping.xml"/>
-		<mapper resource="mybatis-userservice-mapping.xml"/>
+		<mapper resource="sql/mybatis-foodservice-mapping.xml"/>
+		<mapper resource="sql/mybatis-userservice-mapping.xml"/>
 	</mappers>
 </configuration>

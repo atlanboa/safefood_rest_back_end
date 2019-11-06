@@ -129,7 +129,11 @@
 	$(document).on("click","#logout",function(){
 		$.ajax({
 			url:"logout",
-			succ
+			success : function(resData) {
+				location.href="index.jsp";
+			},error : function() {
+				alert("로그아웃 오류")
+			}
 			
 		});
 	});

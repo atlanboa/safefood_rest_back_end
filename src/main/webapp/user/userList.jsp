@@ -32,9 +32,9 @@
 		</tr>
 		<c:forEach var="user" items="${vo}">
 		<tr>
-			<td>${user.id}</td>
-			<td>${user.name}</td>
-			<td>${user.allergy}</td>
+			<td>${vo.id}</td>
+			<td>${vo.name}</td>
+			<td>${vo.allergy}</td>
 		</tr>
 		</c:forEach>
 		</table>
