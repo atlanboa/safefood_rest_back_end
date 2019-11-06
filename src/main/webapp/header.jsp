@@ -19,9 +19,6 @@
 		  	$(".search-input-elm").animate({ width: 'toggle' });
 		});
 		// login toggle button
-		
-		
-		
 	});
 	</script>
 </head>
@@ -36,7 +33,7 @@
 					</div>
 					</li>
 				<c:choose>
-					<c:when test="${empty id}">
+					<c:when test="${empty user}">
 					<li class="nav-item">
 						<a class="nav-link loginList" href="${pageContext.request.contextPath}/user/signUp.jsp"><i class="fas fa-user"></i> Sign Up</a>
 					</li>
@@ -46,13 +43,13 @@
 						</a>
 						<div class="collapse" id="collapseExample" style="position: absolute; z-index: 100; right: 0px; width: 250px;">
 							<div class="card card-body bg-dark" id="loginWindow">
-								<form method="post" action="${pageContext.request.contextPath}/UserServlet">
+								<form id="login">
 									<input type="hidden" name="command" value="login">
 									<label class="text-white">아이디</label><br>
 									<input type="text" class="form-control" name="id" id="identifier" required><br>
 									<label class="text-white">비밀번호</label><br>
 									<input type="password" class="form-control" name="pass" id="password" required><br> <br> 
-									<input type="submit" class="btn btn-light" id="login" value="로 그 인" style="width:100%;">
+									<input type="submit" class="btn btn-light" value="로 그 인" style="width:100%;">
 								</form>
 								<a class="btn btn-dark" href="${pageContext.request.contextPath}/user/passSearch.jsp">비밀번호 찾기</a>
 							</div>
@@ -64,7 +61,7 @@
 						<a class="nav-link" href="${pageContext.request.contextPath}/UserServlet?command=list"><i class="fas fa-users"></i>회원리스트</a>
 					</li>
 					<li class="nav-item logoutList">
-						<a class="nav-link" href="${pageContext.request.contextPath}/UserServlet?command=logout"><i class="fas fa-lock-open"></i>LogOut</a>
+						<a class="nav-link" href="" id="logout"><i class="fas fa-lock-open"></i>LogOut</a>
 					</li>
 					<li class="nav-item logoutList">
 						<a class="nav-link" href="${pageContext.request.contextPath}/UserServlet?command=view"><i class="fas fa-user"></i> 회원정보</a>
@@ -87,11 +84,10 @@
 						<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
 						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/infoPages/foodList.jsp">상품정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">베스트 섭취 정보</a></li>
-						<c:if test="${not empty id}">
+						<c:if test="${not empty user}">
 							<li class="nav-item"><a class="nav-link logoutList" href="${pageContext.request.contextPath}/FoodServlet?command=mydetail">내 섭취 정보</a></li>
 							<li class="nav-item"><a class="nav-link logoutList" href="#">예상 섭취 정보</a></li>	
 						</c:if>
-						
 						<li>
 							<div class="search">
 	                            <div class="search-wrap">
@@ -104,7 +100,6 @@
 	                                </span>
 		                            </div>
 	                            </div>
-	                        </div>
 						</li>
 					</ul>
 				</div>
@@ -112,4 +107,32 @@
 		</nav>
 	</header>
 </body>
+<script type="text/javascript">
+	$("#login").submit(function(){
+		var id = $("#identifier").val();
+		var pass = $("#password").val();
+		var userVO ={};
+		userVO.id = id;
+		userVO.pass = pass;
+		$.ajax({
+			url : "login",
+			type : "post",
+			data : userVO,
+			success : function(resData) {
+				
+			},
+			error : function() {
+				alert("조회 실패(시스템 오류)")
+			}
+		});
+	});
+	$(document).on("click","#logout",function(){
+		$.ajax({
+			url:"logout",
+			succ
+			
+		});
+	});
+	
+</script>
 </html>

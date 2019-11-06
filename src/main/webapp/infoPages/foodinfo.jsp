@@ -112,9 +112,9 @@
 
 </head>
 <body>
-<!-- header -->
-<c:import url="../header.jsp"></c:import>
-<!-- header -->
+	<!-- header -->
+	<c:import url="${pageContext.request.contextPath}/header.jsp"></c:import>
+	<!-- header -->
 	<section>
 		<article>
 				<div class="jumbotron jumbotron-fluid" style="text-align: center;">
@@ -179,7 +179,7 @@
 	</section>
 	
 	<!-- Footer -->
-<c:import url="../footer.jsp"></c:import>
+	<c:import url="${pageContext.request.contextPath}/footer.jsp"></c:import>
 	<!-- Footer -->
 </body>
 </html>
