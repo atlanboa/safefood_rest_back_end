@@ -6,9 +6,10 @@
 	 	<setting name="jdbcTypeForNull" value="NULL"/>
 	 </settings>
 	<typeAliases>
-		<package name="com.delu.review"/>
+		<package name="com.ssafy.safefood.vo"/>
 	</typeAliases>
 	<mappers>
-		<mapper resource="sql/mybatis-empservice-mapping.xml"/>
+		<mapper resource="mybatis-foodservice-mapping.xml"/>
+		<mapper resource="mybatis-userservice-mapping.xml"/>
 	</mappers>
 </configuration>
