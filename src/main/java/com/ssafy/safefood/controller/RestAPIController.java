@@ -31,9 +31,11 @@ public class RestAPIController {
 
 	@GetMapping("search/{category}/{keyword}")
 	public ResponseEntity<List<FoodVO>> search(@PathVariable String category, @PathVariable String keyword) throws Exception {
+		System.out.println("category : "+category+", keyword : "+keyword);
 		List<FoodVO> list = null;
 		if (keyword == null) {
 			list = foodService.selectAll();
+			
 			if(list.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
 			else return new ResponseEntity(list, HttpStatus.OK);
 		} else {
@@ -41,18 +43,21 @@ public class RestAPIController {
 			switch (category) {
 			case "maker":
 				list = foodService.selectByFoodMaker(keyword);
+				System.out.println("maker:"+list);
 				if(list.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
 				else return new ResponseEntity(list, HttpStatus.OK);
 			case "name":
 				list = foodService.selectByFoodName(keyword);
+				System.out.println("name:"+list);
 				if(list.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
 				else return new ResponseEntity(list, HttpStatus.OK);
 			case "material":
 				list = foodService.selectByFoodMaterial(keyword);
+				System.out.println("material:"+list);
 				if(list.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
 				else return new ResponseEntity(list, HttpStatus.OK);
-
 			}
+			
 
 		}
 		

@@ -1,11 +1,13 @@
 package com.ssafy.safefood.dao;
 
+import java.io.Reader;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.google.common.io.Resources;
 import com.ssafy.safefood.vo.FoodVO;
 
 @Repository
@@ -30,13 +32,13 @@ public class FoodDaoImpl implements FoodDao {
 
 	@Override
 	public List<FoodVO> selectByFoodMaker(String maker) throws Exception {
-		return session.selectList(ns+"selectByFoodName", maker);
+		return session.selectList(ns+"selectByFoodMaker", maker);
 	}
 
 	@Override
 	public List<FoodVO> selectByFoodMaterial(String material) throws Exception {
 
-		return session.selectList(ns+"selectByFoodName", material);
+		return session.selectList(ns+"selectByFoodMaterial", material);
 	}
 
 	@Override
@@ -51,6 +53,9 @@ public class FoodDaoImpl implements FoodDao {
 		return session.selectList(ns+"selectAll");
 	}
 
-	
+	public static void main(String[] args) throws Exception {
+//		Reader r = Resources
+//		}
+	}
 	
 }

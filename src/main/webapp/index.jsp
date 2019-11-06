@@ -80,7 +80,7 @@
 	<br>
 	<article>
 		<div class="container">
-			<form class="form-inline d-flex justify-content-center" id="foodSearch">
+			<form class="form-inline d-flex justify-content-center">
 				<label for="cate" class="mb-2 mr-sm-2">검색조건:</label>
       			<select class="form-control mb-2 mr-sm-2" id="cate">
         			<option value="name">상품명</option>
@@ -89,12 +89,11 @@
       			</select>
 				<label for="keyword" class="mb-2 mr-sm-2">검색단어:</label>
 				<input type="text" class="form-control mb-2 mr-sm-2" id="keyword" placeholder="검색단어">
-				<input type="submit" class="btn btn-primary mb-2" value="검색">
+				<input type="button" class="btn btn-primary mb-2" value="검색" id="foodSearch">
 			</form>
 		</div>
 		<div class="container" style="margin-top: 30px">
 			<div class="row" id="foodList">
-				
 			</div>
 		</div>
 	</article>
@@ -108,16 +107,18 @@
 		//alert(path);
 		location.href=path;
 	}
-	$("#foodSearch").submit(function(){
-		let category = $("#cate").val();
-		let keyword = $("#keyword").val();
+	$("#foodSearch").click(function(){
+		var category = $("#cate").val();
+		var keyword = $("#keyword").val();
+		
 		alert(category +"/"+ keyword);
 		$.ajax({
-			url : "search/"category+"/"+keyword,
+			url : "search/"+category+"/"+keyword,
 			type : "get",
 			success : function(resData) {
 				var str = "";
-				$("#foodList").empty();
+				alert($("#foodList").html());
+				/* $("#foodList").empty(); */
 				if(resData!=null){
 					$.each(resData,function(idx,food){
 						if(idx%3==0){
@@ -132,6 +133,8 @@
 						str+='<p class="text">'+food.name+'<br>'+food.maker+'</p>';
 						str+='</div></div>';
 					});//each
+					alert(str);
+					$("#foodList").html(str);
 				}
 			},
 			error : function() {
@@ -139,34 +142,6 @@
 			}
 		});
 	});
-	/* $(document).on("click",".class",function(){
-		let code =
-		$.ajax({
-			url : "foodinfo"+"/"+keyword,
-			type : "get",
-			success : function(resData) {
-				var str = "";
-				$("#foodList").empty();
-				if(resData!=null){
-					$.each(resData,function(idx,food){
-						if(idx%3==0){
-							str+='<div class="col-sm-4 left">';
-						}else if(idx%3==1){
-							str+='<div class="col-sm-4 mid">';
-						}else if(idx%3==2){
-							str+='<div class="col-sm-4 right">';
-						}
-						str+='<div class="info" onclick="forViewPage('+food.code+')">';
-						str+='<img src="'+food.img+'" style="width: 50%; height: 50%;">';
-						str+='<p class="text">'+food.name+'<br>'+food.maker+'</p>';
-						str+='</div></div>';
-					});//each
-				}
-			},
-			error : function() {
-				alert("조회 실패(시스템 오류)")
-			}
-		});
-	}) */
+	
 </script>
 </html>
