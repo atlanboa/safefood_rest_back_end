@@ -113,7 +113,7 @@
 		let keyword = $("#keyword").val();
 		alert(category +"/"+ keyword);
 		$.ajax({
-			url : category+"/"+keyword,
+			url : "search/"category+"/"+keyword,
 			type : "get",
 			success : function(resData) {
 				var str = "";
