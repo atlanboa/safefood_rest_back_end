@@ -30,13 +30,13 @@ public class FoodDaoImpl implements FoodDao {
 
 	@Override
 	public List<FoodVO> selectByFoodMaker(String maker) throws Exception {
-		return session.selectList(ns+"selectByFoodName", maker);
+		return session.selectList(ns+"selectByFoodMaker", maker);
 	}
 
 	@Override
 	public List<FoodVO> selectByFoodMaterial(String material) throws Exception {
 
-		return session.selectList(ns+"selectByFoodName", material);
+		return session.selectList(ns+"selectByFoodMaterial", material);
 	}
 
 	@Override
@@ -51,6 +51,5 @@ public class FoodDaoImpl implements FoodDao {
 		return session.selectList(ns+"selectAll");
 	}
 
-	
 	
 }

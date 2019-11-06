@@ -38,21 +38,22 @@ public class RestAPIController {
 			else return new ResponseEntity(list, HttpStatus.OK);
 		} else {
 
-			switch (category) {
-			case "maker":
+			
+			if(category.equalsIgnoreCase("maker")) {
 				list = foodService.selectByFoodMaker(keyword);
-				if(list.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
+				if(list == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 				else return new ResponseEntity(list, HttpStatus.OK);
-			case "name":
+			}else if(category.equalsIgnoreCase("name")) {
 				list = foodService.selectByFoodName(keyword);
-				if(list.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
+				if(list == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 				else return new ResponseEntity(list, HttpStatus.OK);
-			case "material":
+			}else if(category.equalsIgnoreCase("material")) {
 				list = foodService.selectByFoodMaterial(keyword);
-				if(list.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
+				if(list==null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 				else return new ResponseEntity(list, HttpStatus.OK);
-
 			}
+			
+
 
 		}
 		
