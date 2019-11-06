@@ -119,7 +119,7 @@
 			type : "post",
 			data : userVO,
 			success : function(resData) {
-				
+				location.href="index.jsp";
 			},
 			error : function() {
 				alert("조회 실패(시스템 오류)")
@@ -129,7 +129,11 @@
 	$(document).on("click","#logout",function(){
 		$.ajax({
 			url:"logout",
-			succ
+			success : function(resData) {
+				location.href="index.jsp";
+			},error : function() {
+				alert("로그아웃 오류")
+			}
 			
 		});
 	});
