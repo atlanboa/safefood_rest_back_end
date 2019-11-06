@@ -81,16 +81,14 @@
 	<article>
 		<div class="container">
 			<form class="form-inline d-flex justify-content-center" id="foodSearch">
-				<input type="hidden" name="command" value="search">
-				<input type="hidden" name="location" value="index.jsp">
 				<label for="cate" class="mb-2 mr-sm-2">검색조건:</label>
-      			<select class="form-control mb-2 mr-sm-2" id="cate" name="cate">
+      			<select class="form-control mb-2 mr-sm-2" id="cate">
         			<option value="name">상품명</option>
 	        		<option value="maker">제조사</option>
 	        		<option value="material">원재료</option>
       			</select>
 				<label for="keyword" class="mb-2 mr-sm-2">검색단어:</label>
-				<input type="text" class="form-control mb-2 mr-sm-2" id="keyword" placeholder="검색단어" name="keyword">
+				<input type="text" class="form-control mb-2 mr-sm-2" id="keyword" placeholder="검색단어">
 				<input type="submit" class="btn btn-primary mb-2" value="검색">
 			</form>
 		</div>
