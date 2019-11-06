@@ -8,36 +8,79 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-		integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 	
-<style>
-	.table td {min-width : 100px; word-break: break-all; }
-</style>
-<script src="js/jquery-3.4.1.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<!-- 막대 그래프 사용 -->
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-
+	<style>
+		.table td {min-width : 100px; word-break: break-all; }
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+	<!-- 막대 그래프 사용 -->
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script>
+	function getUrlParams() {
+	    var params = {};
+	    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+	    return params;
+	}
+	params = getUrlParams();
+	alert(params.code);
+	var foodInformation;
+	$.ajax({
+		url : ${pageContext.request.contextPath}"/selectByFoodCode/"+params.code,
+		type : "get",
+		success : function(resData){
+			alert(resData.code);
+			var str = "";
+			str+='<div class="row">';
+			str+='<div class="col-sm-4"><img src="${pageContext.request.contextPath}/'+resData.img+'" style="float:left; width:200px; height:200px;"></div>';
+			str+='<div class="col-sm-8"  style="float: left;">';
+			str+='<table class="table table-hover">';
+			str+='<tr><td>제품명</td><td>'+resData.name+' </td></tr>';
+			str+='<tr><td>제조사</td><td>'+resData.maker+'</td></tr>';
+			str+='<tr><td>원재료</td><td>'+resData.material+'</td></tr>';
+			str+='<tr><td>알레르기 성분</td><td>'+resData.allergy+'</td></tr>';
+			str+='</table>';
+			str+='</div>';
+			str+='</div>';
+			$("#foodInfo").append(str);
+			
+			str ='<table class="table nutri-table">';
+			str +='<tr><td>일회제공량</td><td>+'+resData.supportpereat+'</td></tr>';
+			str +='<tr><td>칼로리</td><td>'+resData.calory+'</td></tr>';
+			str +='<tr><td>탄수화물</td><td>'+resData.carbo+'</td></tr>';
+			str +='<tr><td>단백질</td><td>'+resData.protein+'</td></tr>';
+			str +='<tr><td>지방</td><td>'+resData.fat+'</td></tr>';
+			str +='<tr><td>당류</td><td>'+resData.sugar+'</td></tr>';
+			str +='<tr><td>나트륨</td><td>'+resData.natrium+'</td></tr>';
+			str +='<tr><td>콜레스테롤</td><td>'+resData.chole+'</td></tr>';
+			str +='<tr><td>포화 지방산</td><td>'+resData.fattyacid+'</td></tr>';
+			str +='<tr><td>트랜스지방</td><td>'+resData.transfat+'</td></tr>';
+			str+='</table>';
+			$("#foodMaterial").append(str);
+			foodInformation = resData;
+		},
+		error : function() {
+			
+		}
+	});
 	$(function() {
 		
 		var _tempArray=[
-				<c:out value="${food.supportpereat}"></c:out>,
-				<c:out value="${food.calory}"></c:out>,
-				<c:out value="${food.carbo}"></c:out>,
-				<c:out value="${food.protein}"></c:out>,
-				<c:out value="${food.fat}"></c:out>,
-				<c:out value="${food.sugar}"></c:out>,
-				<c:out value="${food.natrium}"></c:out>,
-				<c:out value="${food.chole}"></c:out>,
-				<c:out value="${food.fattyacid}"></c:out>,
-				<c:out value="${food.transfat}"></c:out>,
+				foodInformation.supportpereat,
+				foodInformation.calory,
+				foodInformation.carbo,
+				foodInformation.protein,
+				foodInformation.fat,
+				foodInformation.sugar,
+				foodInformation.natrium,
+				foodInformation.chole,
+				foodInformation.fattyacid,
+				foodInformation.transfat
 			];
 		
 		Highcharts.chart('graph', {
@@ -123,22 +166,8 @@
 			  	<p>제품 정보</p>
 				</div>
 				
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-4">
-						<!-- 사진 들어가기  -->
-							<img src="${pageContext.request.contextPath}/${food.img}" style="float:left; width:200px; height:200px;">
-						</div>
-						<div class="col-sm-8"  style="float: left;">
-							<table class="table table-hover">
-							<!-- 이름 제조사 재료 알러지 테이블 들어가기 -->	
-							<tr><td>제품명</td><td>${food.name }</td></tr>
-							<tr><td>제조사</td><td>${food.maker }</td></tr>
-							<tr><td>원재료</td><td>${food.material }</td></tr>
-							<tr><td>알레르기 성분</td><td>${food.allergy }</td></tr>
-							</table>
-						</div>
-					</div>
+				<div class="container" id="foodInfo">
+					
 				</div>
 				<div class="container">
 				<fieldset>
@@ -158,20 +187,7 @@
 						<div class="col-sm-6" id="graph" style="min-width: 410px; height: 500px; max-width: 600px; margin-left: 100px; float:left">
 						<!-- 원형 그래프 -->
 						</div>
-						<div class="col-sm-6" style="float:left">
-							<table class="table nutri-table">
-							<!-- 영양소 정보 테이블 -->
-							<tr><td>일회제공량</td><td>${food.supportpereat }</td></tr>
-							<tr><td>칼로리</td><td>${food.calory }</td></tr>
-							<tr><td>탄수화물</td><td>${food.carbo }</td></tr>
-							<tr><td>단백질</td><td>${food.protein }</td></tr>
-							<tr><td>지방</td><td>${food.fat }</td></tr>
-							<tr><td>당류</td><td>${food.sugar }</td></tr>
-							<tr><td>나트륨</td><td>${food.natrium }</td></tr>
-							<tr><td>콜레스테롤</td><td>${food.chole }</td></tr>
-							<tr><td>포화 지방산</td><td>${food.fattyacid }</td></tr>
-							<tr><td>트랜스지방</td><td>${food.transfat }</td></tr>
-							</table>
+						<div class="col-sm-6" style="float:left" id="foodMaterial">
 						</div>
 					</div>
 				</div>
