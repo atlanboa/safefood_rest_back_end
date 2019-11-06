@@ -22,11 +22,10 @@ public class RestAPIController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("maker/{keword}")
-	public ResponseEntity t(@PathVariable String keword) throws Exception {
-		System.out.println("keword : "+keword);
-		List<FoodVO> list = foodService.selectByFoodMaker(keword);
-		return new ResponseEntity(list, HttpStatus.OK);
+	@GetMapping("{maker}/{keword}")
+	public String selectByFoodMaker(@PathVariable String maker,@PathVariable String keword) throws Exception {
+		System.out.println("maker : "+maker+" keword : "+keword);
+//		List<FoodVO> list = foodService.selectByFoodMaker(keword);
+		return maker+" "+keword;
 	}
-	
 }
