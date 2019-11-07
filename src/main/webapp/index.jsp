@@ -104,18 +104,6 @@
 	function forViewPage(code) {
 		var path ="infoPages/foodinfo.jsp?code="+code;
 		location.href=path;
-		/* alert("click"+code);
-		$.ajax({
-			url : "selectByFoodCode/"+code,
-			type : "post",
-			data : {"code" : code},
-			dataType : "json",
-			success : function(resData){
-			},
-			error : function() {
-				
-			}
-		}); */
 	}
 	$("#foodSearch").click(function(){
 		var category = $("#cate").val();

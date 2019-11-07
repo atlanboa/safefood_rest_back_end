@@ -121,7 +121,7 @@
 			data : JSON.stringify(userVO),
 			contentType:"application/json",
 			success : function(resData) {
-				location.href="index.jsp";
+				location.href=${pageContext.request.contextPath}"/index.jsp";
 			},
 			error : function() {
 				alert("조회 실패(시스템 오류)")
