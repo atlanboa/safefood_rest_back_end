@@ -21,7 +21,9 @@
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<c:set var="allergies" value="대두,땅콩,우유,게,새우,참치,연어,쑥,소고기,닭고기,돼지고기,복숭아,민들레,계란흰자"></c:set>
 <script>
+	var allergies = ['대두','땅콩','우유','게','새우','참치','연어','쑥','소고기','닭고기','돼지고기','복숭아','민들레','계란흰자']; 
 	function getUrlParams() {
 	    var params = {};
 	    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
@@ -30,6 +32,7 @@
 	params = getUrlParams();
 	alert(params.code);
 	var foodInformation;
+	var allergy='';
 	$.ajax({
 		url : ${pageContext.request.contextPath}"/selectByFoodCode/"+params.code,
 		type : "get",
@@ -43,7 +46,17 @@
 			str+='<tr><td>제품명</td><td>'+resData.name+' </td></tr>';
 			str+='<tr><td>제조사</td><td>'+resData.maker+'</td></tr>';
 			str+='<tr><td>원재료</td><td>'+resData.material+'</td></tr>';
-			str+='<tr><td>알레르기 성분</td><td>'+resData.allergy+'</td></tr>';
+			var materials = resData.material.split(',');
+			alert(materials[0]+"\\\\ "+allergies[0]);
+			
+			for (var i = 0; i < allergies.length; i++) {
+				for (var j = 0; j < materials.length; j++) {
+					if(materials[j].indexOf(allergies[i])>0){
+						allergy+=allergies[i]+' ';
+					}
+				}
+			}
+			str+='<tr><td>알레르기 성분</td><td>'+allergy+'</td></tr>';
 			str+='</table>';
 			str+='</div>';
 			str+='</div>';
@@ -144,12 +157,23 @@
 	
 	
 	function JJim() {
-		if(quantity <= 0){
-			alert("수량은 1이상 입력해 주세요");
-			quantity.focus();
-			return;
-		}
-		jjimform.submit();
+		alert($("#quantity").val());
+		localStorage.setItem(foodInformation.code,
+				foodInformation.name+','+
+				foodInformation.maker+','+
+				foodInformation.img+','+
+				allergy+','+
+				foodInformation.supportpereat+','+
+				foodInformation.calory+','+
+				foodInformation.carbo+','+
+				foodInformation.protein+','+
+				foodInformation.fat+','+
+				foodInformation.sugar+','+
+				foodInformation.natrium+','+
+				foodInformation.chole+','+
+				foodInformation.fattyacid+','+
+				foodInformation.transfat+','+
+				$("#quantity").val());
 	}
 </script>
 
@@ -172,13 +196,9 @@
 				<div class="container">
 				<fieldset>
 					<legend>Quantity</legend>
-					<form name="jjimform" id="jjimform" action="FoodServlet" method="get">
-						<input type="hidden" name="command" value="jjim">
-						<input type="hidden" name="code" value="${food.code }">
-						<input type="number" name="quantity" value="1" id="quantity">
-						<!-- 추가 눌렀을때 ajax 통신으로 addItem 액션 취하는 걸로 합시다 -->
-						<button type="button" class="btn btn-primary btn-lg addItem" onclick="JJim()">추가</button>
-					</form>
+					<input type="hidden" id="code" value="${food.code }"/>
+					<input type="number" id="quantity" value="1"/>
+					<button type="button" class="btn btn-primary btn-lg addItem" id="jjim" onclick="JJim()">추가</button>
 				</fieldset>
 				</div><br><br><br><br>
 				

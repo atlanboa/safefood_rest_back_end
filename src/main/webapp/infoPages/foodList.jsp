@@ -79,30 +79,26 @@
 		var category = $("#cate").val();
 		var keyword = $("#keyword").val();
 		
-		alert(category +"/"+ keyword);
 		$.ajax({
 			url : ${pageContext.request.contextPath}"/search/"+category+"/"+keyword,
 			type : "get",
 			success : function(resData) {
 				var str = "";
-				alert($("#foodList").html());
 				if(resData!=null){
 					$("#foodList").empty();
 					$.each(resData,function(idx,food){
-						if(idx%3==0){
-							str+='<div class="col-sm-4 left">';
-						}else if(idx%3==1){
-							str+='<div class="col-sm-4 mid">';
-						}else if(idx%3==2){
-							str+='<div class="col-sm-4 right">';
+						if(idx%2==0){
+							str+='<div class="col-sm-6 left" class="foodInfo">';
+						}else if(idx%2==1){
+							str+='<div class="col-sm-6 right" class="foodInfo">';
 						}
-						var path = ${pageContext.request.contextPath};
+						var path = ${pageContext.request.contextPath}"/";
 						str+='<div class="info" onclick="forViewPage('+food.code+')">';
-						str+='<img src="'+path+food.img+'" style="width: 50%; height: 50%;">';
-						str+='<p class="text">'+food.name+'<br>'+food.maker+'</p>';
-						str+='</div></div>';
+						str+='<img class="foodImg" src="'+path+food.img+'" style="float:left; width:30%; height: 30%">';
+						str+='<article class="content" style="float: left; width: 70%">';
+						str+=food.name+'<br>'+food.maker+'<br>'+food.material;
+						str+='</article></div></div>';
 					});//each
-					alert(str);
 					$("#foodList").append(str);
 				}
 			},

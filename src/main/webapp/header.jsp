@@ -81,11 +81,11 @@
 			    
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="#">사이트 소개</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/boards/noticeBoard.jsp">공지사항</a></li>
 						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/infoPages/foodList.jsp">상품정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">베스트 섭취 정보</a></li>
 						<c:if test="${not empty user}">
-							<li class="nav-item"><a class="nav-link logoutList" href="${pageContext.request.contextPath}/FoodServlet?command=mydetail">내 섭취 정보</a></li>
+							<li class="nav-item"><a class="nav-link logoutList" href="${pageContext.request.contextPath}/user/user_Ingestion.jsp">내 섭취 정보</a></li>
 							<li class="nav-item"><a class="nav-link logoutList" href="#">예상 섭취 정보</a></li>	
 						</c:if>
 						<li>

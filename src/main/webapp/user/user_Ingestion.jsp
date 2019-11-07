@@ -29,7 +29,6 @@
 	<style>
 		.table td {min-width : 100px; word-break: break-all; }
 	</style>
-	<script src="js/jquery-3.4.1.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -43,7 +42,111 @@
 		단백질 7-20%
 		지방 15-30%
 		*/
-		$(function() {
+		var userIngestion = [];
+		var totalCarbo;
+		var totalProtein;
+		var totalFat;
+		var totalCalory;
+		$(function (){
+			refreshPage();
+			graphWrite();
+			alert(totalCarbo+" "+totalProtein);
+			
+			$(document).on("click", "#deleteCart", deleteCartStorage);
+		})
+		function deleteCartStorage(){
+			var y=confirm($(this).val() +"을 삭제하시겠습니까?");
+			if(y){
+				localStorage.removeItem($(this).val());
+				refreshPage();
+			}
+		}
+		function graphWrite(){
+			Highcharts.chart('graph', {
+			    chart: {
+			        type: 'bar'
+			    },
+			    title: {
+			        text: '영양 분석'
+			    },
+			    xAxis: {
+			        categories: ['기준치', '현재량']
+			    },
+			    yAxis: {
+			        min: 0,
+			        title: {
+			            text: '3대 영양소'
+			        }
+			    },
+			    legend: {
+			        reversed: true
+			    },
+			    plotOptions: {
+			        series: {
+			            stacking: 'normal'
+			        }
+			    },
+			    series: [{
+			    	name: '지방',
+			        data: [totalFat]
+			    }, {
+			        name: '단백질',
+			        data: [totalProtein]
+			    }, {
+				    name: '탄수화물',
+			        data: [totalCarbo]
+			    }]
+			});
+		}
+		function refreshPage(){
+			totalCarbo=0;
+			totalProtein=0;
+			totalFat=0;
+			totalCalory=0;
+			var html ='';
+			var totalPrice =0;
+			userIngestion = [];
+			for(var key in localStorage){
+				if(key=='length') break;
+				var data =  localStorage.getItem(key).split(",");
+				userIngestion.push({
+					code:key,
+					name:data[0],
+					maker:data[1],
+					img:data[2],
+					allergy:data[3],
+					supportpereat:data[4],
+					calory:data[5],
+					carbo:data[6],
+					protein:data[7],
+					fat:data[8],
+					sugar:data[9],
+					natrium:data[10],
+					chole:data[11],
+					fattyacid:data[12],
+					transfat:data[13],
+					quantity:data[14]
+				});
+				totalCalory+=Number(data[5]);
+				totalCarbo+=Number(data[6]);
+				totalProtein+=Number(data[7]);
+				totalFat+=Number(data[8]);
+			}
+			$("#jjimList").empty();
+			var html = '';
+			for(var i = 0; i < userIngestion.length;i++){
+				html+="<tr>";
+				html+='<td><img src="${pageContext.request.contextPath}/'+userIngestion[i].img+'" style="width: 150px; height: 150px"/></td>';
+				html+="<td>"+userIngestion[i].code+"</td>";
+				html+="<td>"+userIngestion[i].name+"</td>";
+				html+="<td>"+userIngestion[i].maker+"</td>";
+				html+="<td><button   id='deleteCart' value='"+userIngestion[i].code+"'>삭제</button><td>";
+				html+="</tr>";
+			}
+			$("#jjimList").append(html);
+			html ='';
+		}
+		/* $(function() {
 			var totalCalory = <c:out value="${totalCalory}"></c:out>; 
 			var totalCarbo = <c:out value="${totalCarbo}"></c:out>;
 			var totalProtein = <c:out value="${totalProtein}"></c:out> ;
@@ -118,59 +221,25 @@
 			var path ="FoodServlet?command=view&code="+code;
 			//alert(path);
 			location.href=path;
-		}
+		} */
 	</script>
 </head>
 <body>
-<c:set var="totalCalory" value="0"/>
-<c:set var="totalCarbo" value="0"/>
-<c:set var="totalProtein" value="0"/>
-<c:set var="totalFat" value="0"/>
-
-<c:import url="../header.jsp"></c:import>
-<section class="container">
-	<c:forEach items="${list}" var="item" varStatus="i">
-		<div class="col-sm-4" style="text-align: center">
-				<div class="info" onclick="forViewPage(${item.code})">
-					<img src="${pageContext.request.contextPath}/${item.img }" style="width:100%; height: 100%"><br>
-					<article class="content" style="float: left; width: 70%">
-						${item.name}
-					</article>
-				</div>	
-		</div>
-
-	</c:forEach>
-	<br>
-	<h1>섭취정보</h1>
-<%-- 	<c:out value="${totalCalory}"></c:out>
-	<c:out value="${totalCarbo}"></c:out>
-	<c:out value="${totalProtein}"></c:out>
-	<c:out value="${totalFat}"></c:out> --%>
-	<div id="ingestionInfo">
-	</div>
-	<div class="row">
+<c:import url="${pageContext.request.contextPath}/header.jsp"></c:import>
+<section>
+	<article class="container">
+	<table id="jjimList" class="table table-hover">
+	
+	</table>
+	
+	</article>
+	<article class="container">
 		<div id="graph">
-		<!-- 막대 그래프 -->
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-6">
-			<input type="radio" value="male" name="sex"/> 남성<!-- 남성 kg*1.0*24 -->
-			<input type="radio" value="female" name="sex"/> 여성<!-- 여성 kg*0.9*24 --><br>
-			체중 : <input type="text" id="weight" /> kg
-			<input type="button" id="metabolism" value="확인"/>
-		</div>
-		<div class="col-sm-6" id="metabolismInfo">
-		
-		</div>
-	</div>
-	<div class="row" >
-		<div class="col-sm-6" id="training">
-		</div>
-	</div>
+	</article>
 </section>
 
 
-<c:import url="../footer.jsp"></c:import>
+<c:import url="${pageContext.request.contextPath}/footer.jsp"></c:import>
 </body>
 </html>
