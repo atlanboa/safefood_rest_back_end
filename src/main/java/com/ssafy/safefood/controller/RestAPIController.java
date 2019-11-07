@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.safefood.service.FoodService;
+import com.ssafy.safefood.service.NoticeService;
 import com.ssafy.safefood.service.UserService;
 import com.ssafy.safefood.vo.FoodVO;
+import com.ssafy.safefood.vo.NoticeVO;
 import com.ssafy.safefood.vo.UserVO;
 
 @RestController
@@ -28,6 +30,9 @@ public class RestAPIController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private NoticeService noticeService;
 
 	@GetMapping("search/{category}/{keyword}")
 	public ResponseEntity<List<FoodVO>> search(@PathVariable String category, @PathVariable String keyword) throws Exception {
@@ -100,5 +105,19 @@ public class RestAPIController {
 		return new ResponseEntity(HttpStatus.OK); 
 	}
 	
+	
+	@GetMapping("/notice")
+	public ResponseEntity<List<NoticeVO>> selectAll() throws Exception{
+		List<NoticeVO> list = noticeService.selectAll();
+		if(list == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
+		else return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/notice/{no}")
+	public ResponseEntity<NoticeVO> selectAll(@PathVariable int no) throws Exception{
+		NoticeVO rvo = noticeService.selectByNoticeNo(no);
+		if(rvo == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
+		else return new ResponseEntity(rvo, HttpStatus.OK);
+	}
 
 }
