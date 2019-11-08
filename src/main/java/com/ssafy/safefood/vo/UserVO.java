@@ -7,6 +7,9 @@ public class UserVO {
 	private String address;
 	private String phone;
 	private String[] allergy;
+	public UserVO() {
+		
+	}
 	public UserVO(String id, String pass, String name, String address, String phone, String[] allergy) {
 		super();
 		this.id = id;

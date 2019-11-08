@@ -27,7 +27,7 @@
 	<article>
 	<div class="container">
 		<h1>회원가입</h1>
-		<form class="needs-validation" id="signUp">
+		<form class="needs-validation">
 		<table class="table">
 			<tr>
 				<th>아이디</th>
@@ -130,7 +130,7 @@
 				</td>
 			</tr>
 		</table>
-		<input type="submit" class="btn btn-outline-primary" id="signUp" value="회원가입 ✓">
+		<input type="button" class="btn btn-outline-primary" id="signUp" value="회원가입 ✓">
 		</form>
 	</div>
 	</article>
@@ -140,33 +140,31 @@
 	<!-- Footer -->
 </body>
 <script type="text/javascript">
-	$("#signUp").submit(function(){
-		var userInfo = {};
-		var id = $("#id").val();
-		var pass = $("#pass").val();
-		var name = $("#name").val();
-		var address = $("#address").val();
-		var phone = $("#phone").val();
+	$("#signUp").click(function(){
 		var allergy = ""
-		$(".allergy:checked").each(function(){
-			allergy += $(this).val()+" ";
-		});
-		userInfo.id=id;
-		userInfo.pass=pass;
-		userInfo.name=name;
-		userInfo.address=address;
-		userInfo.phone=phone;
-		userInfo.allergy=allergy;
+			$(".allergy:checked").each(function(){
+				allergy += $(this).val()+" ";
+			});
+		var userInfo = {
+				id:$("#id").val(),
+				pass:$("#pass").val(),
+				name:$("#name").val(),
+				address:$("#address").val(),
+				phone:$("#phone").val(),
+				allergy:allergy
+		};
+		alert(userInfo.allergy);
 		$.ajax({
-			url : "insertUser",
+			url : ${pageContext.request.contextPath}"/insertUser",
 			type : "post",
-			data : userInfo,
-			dataType : "json",
+			data : JSON.stringify(userInfo),
+			contentType:"application/json",
 			success : function(){
+				alert(userInfo);
 				window.location.href = "http://localhost:9999/";
 			},
-			error : function(){
-				alert("아이디 또는 패스워드를 확인하세요");
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	});

@@ -8,26 +8,29 @@
 	<sql id="select">
 		SELECT
 		code, name, supportpereat, calory, carbo,
-		protein, fat, sugar, natrium,
+		protein,
+		fat, sugar, natrium,
 		chole,
 		fattyacid, transfat, maker,
-		material, img, allergy
+		material, img,
+		allergy
 		FROM
 		food
 	</sql>
 
 	<select id="selectAll" resultType="foodVO">
-		<include refid="select" />
+		SELECT
+		*
+		FROM
+		food
 	</select>
 
-	<select id="selectByFoodName" parameterType="string"
-		resultType="foodVO">
+	<select id="selectByFoodName" parameterType="string" resultType="foodVO">
 		<include refid="select" />
 		WHERE name LIKE '%${value}%'
 	</select>
 
-	<select id="selectByFoodMaker" parameterType="string"
-		resultType="foodVO">
+	<select id="selectByFoodMaker" parameterType="string" resultType="foodVo">
 		<include refid="select" />
 		WHERE maker LIKE '%${value}%'
 	</select>
