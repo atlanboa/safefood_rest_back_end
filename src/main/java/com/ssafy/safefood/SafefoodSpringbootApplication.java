@@ -9,5 +9,3 @@ public class SafefoodSpringbootApplication {
 		SpringApplication.run(SafefoodSpringbootApplication.class, args);
 	}
 }
-
-

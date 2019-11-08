@@ -30,14 +30,12 @@
 	    return params;
 	}
 	params = getUrlParams();
-	alert(params.code);
 	var foodInformation;
 	var allergy='';
 	$.ajax({
 		url : ${pageContext.request.contextPath}"/selectByFoodCode/"+params.code,
 		type : "get",
 		success : function(resData){
-			alert(resData.code);
 			var str = "";
 			str+='<div class="row">';
 			str+='<div class="col-sm-4"><img src="${pageContext.request.contextPath}/'+resData.img+'" style="float:left; width:200px; height:200px;"></div>';
@@ -47,7 +45,6 @@
 			str+='<tr><td>제조사</td><td>'+resData.maker+'</td></tr>';
 			str+='<tr><td>원재료</td><td>'+resData.material+'</td></tr>';
 			var materials = resData.material.split(',');
-			alert(materials[0]+"\\\\ "+allergies[0]);
 			
 			for (var i = 0; i < allergies.length; i++) {
 				for (var j = 0; j < materials.length; j++) {
@@ -157,7 +154,6 @@
 	
 	
 	function JJim() {
-		alert($("#quantity").val());
 		localStorage.setItem(foodInformation.code,
 				foodInformation.name+','+
 				foodInformation.maker+','+

@@ -109,13 +109,11 @@
 		var category = $("#cate").val();
 		var keyword = $("#keyword").val();
 		
-		alert(category +"/"+ keyword);
 		$.ajax({
 			url : "search/"+category+"/"+keyword,
 			type : "get",
 			success : function(resData) {
 				var str = "";
-				alert($("#foodList").html());
 				/* $("#foodList").empty(); */
 				if(resData!=null){
 					$.each(resData,function(idx,food){
@@ -131,7 +129,6 @@
 						str+='<p class="text">'+food.name+'<br>'+food.maker+'</p>';
 						str+='</div></div>';
 					});//each
-					alert(str);
 					$("#foodList").html(str);
 				}
 			},
