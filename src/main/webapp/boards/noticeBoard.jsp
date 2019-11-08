@@ -43,6 +43,10 @@
 		var path ="noticeView.jsp?no="+id;
 		location.href=path;
 	}
+	$("#noticeWriter").click(function(){
+		var path ="noticeWrite.jsp";
+		location.href=path;
+	});
 </script>
 <body>
 <c:import url="${pageContext.request.contextPath}/header.jsp"></c:import>
@@ -65,6 +69,7 @@
 			<li class="page-item"><a class="page-link" href="#">3</a></li>
 			<li class="page-item"><a class="page-link" href="#">Next</a></li>
 		</ul>
+		<input type="button" id="noticeWriter" value="글쓰기"/>
 	</article>
 </section>
 <c:import url="${pageContext.request.contextPath}/footer.jsp"></c:import>
