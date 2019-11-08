@@ -31,6 +31,7 @@ public class RestAPIController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
 	@GetMapping("search/{category}")
 	public ResponseEntity<List<FoodVO>> search(@PathVariable String category)throws Exception{
 		List<FoodVO> list = null;
@@ -39,13 +40,13 @@ public class RestAPIController {
 		if(list.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(list, HttpStatus.OK);
 	}
+	
 	@GetMapping("search/{category}/{keyword}")
 	public ResponseEntity<List<FoodVO>> search(@PathVariable String category, @PathVariable String keyword) throws Exception {
 		List<FoodVO> list = null;
 		if(keyword==null)
 		{
 			System.out.println("category : "+category+", keyword : "+keyword);
-
 		} else {
 
 			
@@ -126,6 +127,21 @@ public class RestAPIController {
 		NoticeVO rvo = noticeService.selectByNoticeNo(no);
 		if(rvo == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(rvo, HttpStatus.OK);
+	}
+	
+	@PostMapping("/noticeUpdate")
+	public ResponseEntity noticeUpdate(@RequestBody NoticeVO pvo) throws Exception{
+		noticeService.updateNotice(pvo);
+		return new ResponseEntity(HttpStatus.OK);
+		
+	}
+	
+	
+	
+	@PostMapping("/noticeInsert")
+	public ResponseEntity noticeInsert(@RequestBody NoticeVO pvo) throws Exception{
+		noticeService.insertNotice(pvo);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 
 }
