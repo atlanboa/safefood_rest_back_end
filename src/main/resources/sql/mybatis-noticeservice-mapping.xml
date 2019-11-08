@@ -14,4 +14,17 @@
 		FROM notice
 		WHERE no = #{value}
 	</select>
+	
+	
+	<insert id="insertNotice" parameterType="noticeVO" useGeneratedKeys="true" keyProperty="no">
+		INSERT INTO notice (title, content, writer, hit, time)
+		VALUES ( #{title}, #{content}, #{writer}, #{hit}, #{time})
+	</insert>
+	
+	<update id="updateNotice" parameterType="noticeVO">
+		UPDATE notice
+		SET title=#{title}, content=#{content}, writer=#{writer}, hit=#{hit}, time=#{time}
+		WHERE no=#{no}
+	</update>
+	
 </mapper>

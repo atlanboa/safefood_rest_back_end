@@ -9,11 +9,11 @@ import com.ssafy.safefood.dao.NoticeDao;
 import com.ssafy.safefood.vo.NoticeVO;
 
 @Service
-public class NoticeServiceImpl implements NoticeService{
+public class NoticeServiceImpl implements NoticeService {
 
 	@Autowired
 	private NoticeDao dao;
-	
+
 	@Override
 	public List<NoticeVO> selectAll() throws Exception {
 		return dao.selectAll();
@@ -23,6 +23,18 @@ public class NoticeServiceImpl implements NoticeService{
 	public NoticeVO selectByNoticeNo(int no) throws Exception {
 
 		return dao.selectByNoticeNo(no);
+	}
+
+	@Override
+	public void insertNotice(NoticeVO pvo) throws Exception {
+		dao.insertNotice(pvo);
+
+	}
+
+	@Override
+	public void updateNotice(NoticeVO pvo) throws Exception {
+		dao.updateNotice(pvo);
+
 	}
 
 }

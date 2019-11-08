@@ -26,4 +26,14 @@ public class NoticeDaoImpl implements NoticeDao{
 		return session.selectOne(ns+"selectByNoticeNo", no);
 	}
 
+	@Override
+	public void insertNotice(NoticeVO pvo) throws Exception {
+		session.insert(ns+"insertNotice", pvo);
+	}
+
+	@Override
+	public void updateNotice(NoticeVO pvo) throws Exception {
+		session.update(ns+"updateNotice", pvo);
+	}
+
 }
