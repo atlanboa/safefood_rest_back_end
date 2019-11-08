@@ -36,4 +36,10 @@ public class NoticeDaoImpl implements NoticeDao{
 		session.update(ns+"updateNotice", pvo);
 	}
 
+	@Override
+	public void deleteNotice(int no) throws Exception {
+		session.delete(ns+"deleteNotice", no);
+		
+	}
+
 }

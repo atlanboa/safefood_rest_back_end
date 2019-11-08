@@ -38,15 +38,17 @@
 		$("#notice").on("click",".view",function(){
 			viewClick($(this).attr("id"));
 		})
+		
+		$("#noticeWriter").click(function(){
+			var path ="noticeWrite.jsp";
+			location.href=path;
+		});
 	});
 	function viewClick(id){
 		var path ="noticeView.jsp?no="+id;
 		location.href=path;
 	}
-	$("#noticeWriter").click(function(){
-		var path ="noticeWrite.jsp";
-		location.href=path;
-	});
+
 </script>
 <body>
 <c:import url="${pageContext.request.contextPath}/header.jsp"></c:import>

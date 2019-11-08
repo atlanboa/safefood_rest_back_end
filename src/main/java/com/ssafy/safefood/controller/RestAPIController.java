@@ -131,6 +131,7 @@ public class RestAPIController {
 	
 	@PostMapping("/noticeUpdate")
 	public ResponseEntity noticeUpdate(@RequestBody NoticeVO pvo) throws Exception{
+		System.out.println(pvo);
 		noticeService.updateNotice(pvo);
 		return new ResponseEntity(HttpStatus.OK);
 		
@@ -140,7 +141,15 @@ public class RestAPIController {
 	
 	@PostMapping("/noticeInsert")
 	public ResponseEntity noticeInsert(@RequestBody NoticeVO pvo) throws Exception{
+//		System.out.println(pvo);
 		noticeService.insertNotice(pvo);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@GetMapping("/noticeDelete/{no}")
+	public ResponseEntity noticeDelete(@PathVariable int no) throws Exception{
+		System.out.println(no);
+		noticeService.deleteNotice(no);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 

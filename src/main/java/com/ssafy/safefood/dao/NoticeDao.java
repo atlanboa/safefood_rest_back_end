@@ -9,4 +9,5 @@ public interface NoticeDao {
 	NoticeVO selectByNoticeNo(int no) throws Exception;
 	void insertNotice(NoticeVO vo) throws Exception;
 	void updateNotice(NoticeVO vo) throws Exception;
+	void deleteNotice(int no) throws Exception;
 }

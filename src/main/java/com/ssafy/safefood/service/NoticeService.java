@@ -9,4 +9,6 @@ public interface NoticeService {
 	NoticeVO selectByNoticeNo(int no) throws Exception;
 	void insertNotice(NoticeVO pvo) throws Exception;
 	void updateNotice(NoticeVO pvo) throws Exception;
+	void deleteNotice(int no) throws Exception;
 }
+	
