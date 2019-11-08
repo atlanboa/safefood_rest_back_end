@@ -3,16 +3,14 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="NoticeMapper">
-
 	<select id="selectAll" resultType="noticeVO">
-		SELECT
-		*
+		SELECT no, title, content, writer, hit, time
 		FROM notice
 	</select>
-	
-	<select id="selectByNoticeNo" parameterType="int" resultType="noticeVO">
-		SELECT
-		*
+
+	<select id="selectByNoticeNo" parameterType="int"
+		resultType="noticeVO">
+		SELECT no, title, content, writer, hit, time
 		FROM notice
 		WHERE no = #{value}
 	</select>

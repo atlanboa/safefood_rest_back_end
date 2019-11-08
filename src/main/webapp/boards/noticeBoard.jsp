@@ -14,8 +14,9 @@
 </head>
 <script type="text/javascript">
 	$.ajax({
-		url : "notice",
+		url : ${pageContext.request.contextPath}"/notice",
 		type : "get",
+		contentType : "json",
 		success : function(resData){
 			var str = '';
 			if(resData!=null){
@@ -35,11 +36,11 @@
 	});
 	$(function(){
 		$("#notice").on("click",".view",function(){
-			viewClick();
+			viewClick($(this).attr("id"));
 		})
 	});
-	function viewClick(){
-		var path ="${pageContext.request.contextPath}boards/noticeView.jsp?no="+this.id;
+	function viewClick(id){
+		var path ="noticeView.jsp?no="+id;
 		location.href=path;
 	}
 </script>

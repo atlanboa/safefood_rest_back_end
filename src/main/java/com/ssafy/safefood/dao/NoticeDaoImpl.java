@@ -18,13 +18,11 @@ public class NoticeDaoImpl implements NoticeDao{
 	
 	@Override
 	public List<NoticeVO> selectAll() throws Exception {
-		
 		return session.selectList(ns+"selectAll");
 	}
 
 	@Override
 	public NoticeVO selectByNoticeNo(int no) throws Exception {
-	
 		return session.selectOne(ns+"selectByNoticeNo", no);
 	}
 

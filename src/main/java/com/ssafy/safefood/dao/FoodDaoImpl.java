@@ -46,13 +46,4 @@ public class FoodDaoImpl implements FoodDao {
 
 		return session.selectList(ns+"selectAll");
 	}
-
-<<<<<<< src/main/java/com/ssafy/safefood/dao/FoodDaoImpl.java
-=======
-	public static void main(String[] args) throws Exception {
-//		Reader r = Resources
-//		}
-	}
->>>>>>> src/main/java/com/ssafy/safefood/dao/FoodDaoImpl.java
-	
 }

@@ -28,41 +28,24 @@ public class RestAPIController {
 
 	@Autowired
 	private UserService userService;
-<<<<<<< src/main/java/com/ssafy/safefood/controller/RestAPIController.java
 	
 	@Autowired
 	private NoticeService noticeService;
-=======
 	@GetMapping("search/{category}")
 	public ResponseEntity<List<FoodVO>> search(@PathVariable String category)throws Exception{
 		List<FoodVO> list = null;
 		list = foodService.selectAll();
->>>>>>> src/main/java/com/ssafy/safefood/controller/RestAPIController.java
 
 		if(list.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(list, HttpStatus.OK);
 	}
 	@GetMapping("search/{category}/{keyword}")
 	public ResponseEntity<List<FoodVO>> search(@PathVariable String category, @PathVariable String keyword) throws Exception {
-		System.out.println("category : "+category+", keyword : "+keyword);
 		List<FoodVO> list = null;
-		switch (category) {
-		case "maker":
-			list = foodService.selectByFoodMaker(keyword);
-			System.out.println("maker:"+list);
-			if(list.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
-			else return new ResponseEntity(list, HttpStatus.OK);
-		case "name":
-			list = foodService.selectByFoodName(keyword);
-			System.out.println("name:"+list);
-			if(list.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
-			else return new ResponseEntity(list, HttpStatus.OK);
-		case "material":
-			list = foodService.selectByFoodMaterial(keyword);
-			System.out.println("material:"+list);
-			if(list.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
-			else return new ResponseEntity(list, HttpStatus.OK);
-<<<<<<< src/main/java/com/ssafy/safefood/controller/RestAPIController.java
+		if(keyword==null)
+		{
+			System.out.println("category : "+category+", keyword : "+keyword);
+
 		} else {
 
 			
@@ -79,11 +62,6 @@ public class RestAPIController {
 				if(list==null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 				else return new ResponseEntity(list, HttpStatus.OK);
 			}
-			
-
-
-=======
->>>>>>> src/main/java/com/ssafy/safefood/controller/RestAPIController.java
 		}
 
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -133,12 +111,12 @@ public class RestAPIController {
 		session.invalidate();
 		return new ResponseEntity(HttpStatus.OK); 
 	}
-<<<<<<< src/main/java/com/ssafy/safefood/controller/RestAPIController.java
 	
 	
 	@GetMapping("/notice")
 	public ResponseEntity<List<NoticeVO>> selectAll() throws Exception{
 		List<NoticeVO> list = noticeService.selectAll();
+		System.out.println(list);
 		if(list == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(list, HttpStatus.OK);
 	}
@@ -149,8 +127,5 @@ public class RestAPIController {
 		if(rvo == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(rvo, HttpStatus.OK);
 	}
-=======
-
->>>>>>> src/main/java/com/ssafy/safefood/controller/RestAPIController.java
 
 }

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri=" http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,49 +13,48 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <script type="text/javascript">
-	var notice = {};
+	
 	var str = '';
+	var params = {};
 	function getUrlParams() {
-	    var params = {};
 	    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
 	    return params;
 	}
 	params = getUrlParams();
-	$.ajax({
-		url : ${pageContext.request.contextPath}"notice/"+params.no,
-		type : "get",
-		contentType :"json",
-		success : function(resData){
-			
-			if(resData!=null){
-				notice.title=resData.title;
-				notice.writer=resData.writer;
-				notice.content=resData.content;
-				notice.hit=resData.hit;
-				notice.time=resData.time;
-				
-				
-			}
-		}//success
-	})
-	$(){
+	var notice = {};
+	$(function(){
+		$.ajax({
+			url : ${pageContext.request.contextPath}"/notice/"+params.no,
+			type : "get",
+			contentType :"json",
+			success : function(resData){
+				if(resData!=null){
+					notice.title=resData.title;
+					notice.writer=resData.writer;
+					notice.content=resData.content;
+					notice.hit=resData.hit;
+					notice.time=resData.time;
+					listPage();
+				}
+			}//success
+		})
+		
+	});
+	function listPage(){
 		str = '';
 		str+='<tr>';
-		str+='<th>'+제목+'</th>';
+		str+='<th>제목</th>';
 		str+='<td>'+notice.title+'</td>';
-		str+='<th>'+작성자+'</th>';
+		str+='<th>작성자</th>';
 		str+='<td>'+notice.writer+'</td>';
-		str+='<th>'+내용+'</th>';
+		str+='<th>내용</th>';
 		str+='<td>'+notice.content+'</td>';
-		str+='<th>'+조회수+'</th>';
+		str+='<th>조회수</th>';
 		str+='<td>'+notice.hit+'</td>';
-		str+='<th>'+작성시간+'</th>';
-		str+='<td><fmt:formatDate value="'+notice.time+'" pattern="yyyy-MM-dd"/></td>';
+		str+='<th>작성시간</th>';
+		str+='<td>'+notice.time+'</td>';
 		str+='</tr>';
 		$("#notice").append(str);
-	}
-	function listPage(){
-		
 	}
 	$("#delete").click(function(){
 		
@@ -71,7 +69,7 @@
 			
 			</tbody>
 		</table>
-		<input type="button" class="btn" value="삭제" id="delete"/>
+		<input type="button" class="btn btn-outline-dange" value="삭제" id="delete"/>
 	</article>
 </section>
 <c:import url="${pageContext.request.contextPath}/footer.jsp"></c:import>
