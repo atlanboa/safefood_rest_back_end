@@ -23,8 +23,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-		integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 	
 	<style>
 		.table td {min-width : 100px; word-break: break-all; }
@@ -47,13 +46,18 @@
 		var totalProtein;
 		var totalFat;
 		var totalCalory;
+		var totalNatrium;
 		$(function (){
 			refreshPage();
 			graphWrite();
-			alert(totalCarbo+" "+totalProtein);
+			
+			$("#ingestionInfo").append("<p> 총 칼로리 : "+totalCalory+" kcal</p><p> 총 탄수화물 : "+totalCarbo+"g </p><p> 총 단백질 : "+totalProtein+"g</p><p> 총 지방 : "+totalFat+"g</p>");
 			
 			$(document).on("click", "#deleteCart", deleteCartStorage);
-		})
+		});
+		
+///////////////////////////////////////////////////////////////////////
+		
 		function deleteCartStorage(){
 			var y=confirm($(this).val() +"을 삭제하시겠습니까?");
 			if(y){
@@ -103,6 +107,7 @@
 			totalProtein=0;
 			totalFat=0;
 			totalCalory=0;
+			totalNatrium=0;
 			var html ='';
 			var totalPrice =0;
 			userIngestion = [];
@@ -131,6 +136,7 @@
 				totalCarbo+=Number(data[6]);
 				totalProtein+=Number(data[7]);
 				totalFat+=Number(data[8]);
+				totalNatrium+=Number(data[10]);
 			}
 			$("#jjimList").empty();
 			var html = '';
@@ -146,6 +152,26 @@
 			$("#jjimList").append(html);
 			html ='';
 		}
+		$("#metabolism").click(function(){
+			var sex = $('#sex:checked').val();
+			var weight = $('#weight').val();
+			var result = 0;
+			if(sex=="male"){
+				result = weight*1.0*24;
+			}else{
+				result = weight*0.9*24;
+			}
+			var warm = "";
+			var over = "";
+			if(result > totalCalory){
+				warm="<p>안전 합니다.</p>";
+			}else{
+				warm='<p style="color:red;">칼로리'+(-(result-totalCalory))+'kcal 초과!!</p>';
+				over='<p>달리기 :'+1000*(-(result-totalCalory))/5/3.5/weight/10/60+'시간을 달려야 됩니다!</p>';
+			}
+			$("#metabolismInfo").html("<p>"+result+"kcal</p><p>"+warm+"</p>");
+			$("#training").html(over);
+		});
 		/* $(function() {
 			var totalCalory = <c:out value="${totalCalory}"></c:out>; 
 			var totalCarbo = <c:out value="${totalCarbo}"></c:out>;
@@ -236,10 +262,24 @@
 	<article class="container">
 		<div id="graph">
 		</div>
+		<div id="ingestionInfo">
+		</div>
+	</article>
+	<article class="container">
+		<div>
+			<select id="sex">
+				<option value="male">남자</option>
+				<option value="female">여자</option>
+			</select>
+			<input type="text" id="weight"/>
+			<input type="button" class="btn btn-outline-primary" id="metabolism" value="계산"/>
+		</div>
+		<div id="metabolismInfo">
+		</div>
+		<div id="training">
+		</div>
 	</article>
 </section>
-
-
 <c:import url="${pageContext.request.contextPath}/footer.jsp"></c:import>
 </body>
 </html>
