@@ -13,30 +13,47 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <script type="text/javascript">
-	var sessionUId = "<%=session.getAttribute("user.id") %>";
-	$(function(){
-		$("#userId").append(sessionUId);
-	});
-	$("#insert").click(function(){
-		var write = {
-				title: $("#title").val(),
-				content: $("#content").val()
-		};
-		$.ajax({
-			url : ${pageContext.request.contextPath}"/noticeInsert",
-			type : "post",
-			data : JSON.stringify(write),
-			contentType :"json",
-			success : function(resData){
-				
-				alert("입력 완료");
-				location.href=${pageContext.request.contextPath}"/board/noticeBoard.jsp";
-			},//success
-			error : function(error){
-				alert("수정실패");
-			}
-		});//ajax
-	});
+
+
+	$(function() {
+		$("#insert").click(function(){
+			
+			
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+			
+			today = yyyy+'-'+mm+'-'+dd;
+			
+			var write = {
+					title: $("#title").val(),
+					content: $("#content").val(),
+					writer : $("#userId").html(),
+					hit : 1,
+					time : today
+					
+			};
+			
+			$.ajax({
+				url : ${pageContext.request.contextPath}"/noticeInsert",
+				type : "post",
+				data : JSON.stringify(write),
+				contentType :"application/JSON",
+				success : function(resData){
+					
+					
+					location.href=${pageContext.request.contextPath}"/boards/noticeBoard.jsp";
+				},//success
+				error : function(error){
+					
+				}
+			});//ajax
+		});
+	})
+
+
+	
 	
 </script>
 <body>
@@ -51,12 +68,15 @@
 				<td> <input type="text" id="title"/> </td>
 				</tr>
 				<tr>
+				<th> 작성자 </th> <td id="userId">${user.id}</td>
+				</tr>
+				<tr>	
 				<th> 내용 </th>
-				<td> <input type="text" id="content"/> </td>
+				<td> <textarea rows="15" cols="100" id="content">
+				
+				</textarea> </td>
 				</tr>
-				<tr>
-				<th> 작성자 </th> <td id="userId"></td>
-				</tr>
+				
 			</tbody>
 		</table>
 		<input type="button" class="btn btn-outline-primary" value="글쓰기" id="insert"/>

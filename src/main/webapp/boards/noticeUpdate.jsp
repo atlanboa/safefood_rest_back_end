@@ -13,86 +13,73 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <script type="text/javascript">
-	
-	var str = '';
 	var params = {};
 	function getUrlParams() {
 	    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
 	    return params;
 	}
-	params = getUrlParams();
-	var notice = {};
-	$(function(){
+	params = getUrlParams();	
+
+	var hit;
+
+	$(function() {
+		
 		$.ajax({
-			url : ${pageContext.request.contextPath}"/notice/"+params.no,
+			url : "/notice/"+params.no,
 			type : "get",
-			contentType :"json",
+			contentType :"application/JSON",
 			success : function(resData){
-				if(resData!=null){
-					notice.no = resData.no;
-					notice.title=resData.title;
-					notice.writer=resData.writer;
-					notice.content=resData.content;
-					notice.hit=resData.hit;
-					notice.time=resData.time;
-					listPage();
-				}
-			}//success
-		})
+				$("#title").val(resData.title);
+				$("#writer").html(resData.writer);
+				$("#content").val(resData.content);
+				hit = resData.hit;
+			},//success
+			error : function(error){
+				alert("데이터 가져오기 실패");
+			}
+		});//ajax
+		
 		
 		$("#update").click(function(){
-			alert("update click");
-			location.href=${pageContext.request.contextPath}"/boards/noticeUpdate.jsp?no="+notice.no;
-			/*$.ajax({
+			
+			
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+			
+			today = yyyy+'-'+mm+'-'+dd;
+			
+			var write = {
+					no : params.no,
+					title: $("#title").val(),
+					content: $("#content").val(),
+					writer : $("#writer").html(),
+					hit : hit,
+					time : today
+					
+			};
+			
+			$.ajax({
 				url : ${pageContext.request.contextPath}"/noticeUpdate",
 				type : "post",
-				contentType :"json",
+				data : JSON.stringify(write),
+				contentType :"application/JSON",
 				success : function(resData){
-					alert("수정완료");
-					location.href=${pageContext.request.contextPath}"/board/noticeBoard.jsp";
-				},//success
-				error : function(error){
-					alert("수정실패");
-				}
-			})*/
-		});
-		
-		$("#delete").click(function(){
-			$.ajax({
-				url : ${pageContext.request.contextPath}"/noticeDelete/"+params.no,
-				type : "get",
-				success : function(resData){
-					alert("삭제완료");
+					
+					
 					location.href=${pageContext.request.contextPath}"/boards/noticeBoard.jsp";
 				},//success
 				error : function(error){
-					alert("삭제실패");
+					
 				}
-			})
+			});//ajax
 		});
-		
-	});
-	function listPage(){
-		str = '';
-		str+='<tr>';
-		str+='<th>제목</th>';
-		str+='<td>'+notice.title+'</td>';
-		str+='</tr><tr>';
-		str+='<th>작성자</th>';
-		str+='<td>'+notice.writer+'</td>';
-		str+='</tr><tr>';
-		str+='<th>내용</th>';
-		str+='<td>'+notice.content+'</td>';
-		str+='</tr><tr>';
-		str+='<th>조회수</th>';
-		str+='<td>'+notice.hit+'</td>';
-		str+='</tr><tr>';
-		str+='<th>작성시간</th>';
-		str+='<td>'+notice.time+'</td>';
-		str+='</tr>';
-		$("#notice").append(str);
-	}
+	})
 
+
+	
+	
 </script>
 <body>
 <c:import url="${pageContext.request.contextPath}/header.jsp"></c:import>
@@ -101,11 +88,21 @@
 	<br>
 		<table class="table">
 			<tbody id="notice">
-			
+				<tr>
+				<th> 제목 </th>
+				<td> <input type="text" id="title"/> </td>
+				</tr>
+				<tr>
+				<th> 작성자 </th> <td id="writer"></td>
+				</tr>
+				<tr>	
+				<th> 내용 </th>
+				<td> <textarea rows="15" cols="100" id="content" place></textarea> </td>
+				</tr>
+				
 			</tbody>
 		</table>
 		<input type="button" class="btn btn-outline-primary" value="수정" id="update"/>
-		<input type="button" class="btn btn-outline-dange" value="삭제" id="delete"/>
 	</article>
 </section>
 <c:import url="${pageContext.request.contextPath}/footer.jsp"></c:import>
