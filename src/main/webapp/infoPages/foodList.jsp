@@ -14,15 +14,33 @@
 		integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 	<style type="text/css">
 	section:after {
-	
   		content: "";
   		display: table;
   		clear: both;
   		
 	}
-	
+	div.foodInfo{
+		border: 10px solid #FFFFFF;
+		height: 200px;
+	}
+	div.foodInfo:HOVER{
+		border: 5px inset #8B0000;
+		height: auto;
+		padding: 10px;
+		height: 200px;
+	}
+	div.foodMaterial{
+		display: inline-block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		/* 여러 줄 자르기 추가 스타일 */
+		white-space: normal; 
+		line-height: 1.2; 
+		height: 3.6em;
+	}
 	div.info :HOVER{ 
-		background: pink;
+		
 	}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -88,16 +106,16 @@
 					$("#foodList").empty();
 					$.each(resData,function(idx,food){
 						if(idx%2==0){
-							str+='<div class="col-sm-6 left" class="foodInfo">';
+							str+='<div class="col-sm-6 left foodInfo">';
 						}else if(idx%2==1){
-							str+='<div class="col-sm-6 right" class="foodInfo">';
+							str+='<div class="col-sm-6 right foodInfo">';
 						}
 						var path = ${pageContext.request.contextPath}"/";
 						str+='<div class="info" onclick="forViewPage('+food.code+')">';
 						str+='<img class="foodImg" src="'+path+food.img+'" style="float:left; width:30%; height: 30%">';
-						str+='<article class="content" style="float: left; width: 70%">';
-						str+=food.name+'<br>'+food.maker+'<br>'+food.material;
-						str+='</article></div></div>';
+						str+='<div class="content" style="float: left; width: 70%;">';
+						str+='<div>'+food.name+'</div><div>'+food.maker+'</div><div class="foodMaterial">'+food.material+'</div>';
+						str+='</div></div></div>';
 					});//each
 					$("#foodList").append(str);
 				}

@@ -108,7 +108,6 @@
 				phone:$("#phone").val(),
 				allergy:allergy
 		};
-		alert(userInfo.allergy);
 		$.ajax({
 			url : ${pageContext.request.contextPath}"/updateUser",
 			type : "post",
@@ -135,7 +134,6 @@
 				phone:$("#phone").val(),
 				allergy:allergy
 		};
-		alert(userInfo.id);
 		$.ajax({
 			url : ${pageContext.request.contextPath}"/deleteUser",
 			type : "post",
