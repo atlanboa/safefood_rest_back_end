@@ -132,7 +132,7 @@
 		$.ajax({
 			url:${pageContext.request.contextPath}"/logout",
 			success : function(resData) {
-				location.href="index.jsp";
+				location.href=${pageContext.request.contextPath}"index.jsp";
 			},error : function() {
 				alert("로그아웃 오류")
 			}
