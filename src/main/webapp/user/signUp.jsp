@@ -153,14 +153,12 @@
 				phone:$("#phone").val(),
 				allergy:allergy
 		};
-		alert(userInfo.allergy);
 		$.ajax({
 			url : ${pageContext.request.contextPath}"/insertUser",
 			type : "post",
 			data : JSON.stringify(userInfo),
 			contentType:"application/json",
 			success : function(){
-				alert(userInfo);
 				window.location.href = "http://localhost:9999/";
 			},
 			error:function(request,status,error){
