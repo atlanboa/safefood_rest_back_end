@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.safefood.dao.QnaDao;
+import com.ssafy.safefood.service.CommentService;
 import com.ssafy.safefood.service.FoodService;
 import com.ssafy.safefood.service.NoticeService;
 import com.ssafy.safefood.service.QnaService;
 import com.ssafy.safefood.service.UserService;
+import com.ssafy.safefood.vo.CommentVO;
 import com.ssafy.safefood.vo.FoodVO;
 import com.ssafy.safefood.vo.NoticeVO;
 import com.ssafy.safefood.vo.QnaVO;
@@ -40,6 +42,9 @@ public class RestAPIController {
 	
 	@Autowired
 	private QnaService qnaService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@GetMapping("search/{category}")
 	public ResponseEntity<List<FoodVO>> search(@PathVariable String category)throws Exception{
@@ -204,6 +209,36 @@ public class RestAPIController {
 	public ResponseEntity selectByQnaTitle(@PathVariable int no) throws Exception{
 		System.out.println("deleteqna");
 		qnaService.deleteQna(no);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/comment/{no}")
+	public ResponseEntity selectByNo(@PathVariable int no) throws Exception{
+		System.out.println("selectByNo");
+		List<CommentVO> rvo = commentService.selectByNo(no);
+		if(rvo == null) new ResponseEntity(HttpStatus.NO_CONTENT);
+		return new ResponseEntity(rvo, HttpStatus.OK);
+	}
+	
+	@PostMapping("/insertcomment")
+	public ResponseEntity insertComment(@RequestBody CommentVO vo) throws Exception{
+		System.out.println("insertqna");
+		commentService.insertComment(vo);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@PutMapping("/updatecomment")
+	public ResponseEntity updateComment(@RequestBody CommentVO vo) throws Exception{
+		System.out.println("updateComment");
+		commentService.updateComment(vo);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@GetMapping("/deletecomment/{no}")
+	public ResponseEntity deleteComment(@PathVariable int no) throws Exception{
+		System.out.println("deleteComment");
+		commentService.deleteComment(no);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
