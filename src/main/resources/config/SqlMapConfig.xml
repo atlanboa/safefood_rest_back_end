@@ -12,5 +12,7 @@
 		<mapper resource="sql/mybatis-foodservice-mapping.xml"/>
 		<mapper resource="sql/mybatis-userservice-mapping.xml"/>
 		<mapper resource="sql/mybatis-noticeservice-mapping.xml"/>
+		<mapper resource="sql/mybatis-qnaservice-mapping.xml"/>
+		<mapper resource="sql/mybatis-commentservice-mapping.xml"/>
 	</mappers>
 </configuration>

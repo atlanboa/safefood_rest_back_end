@@ -11,7 +11,7 @@ import com.ssafy.safefood.vo.CommentVO;
 @Repository
 public class CommentDaoImpl implements CommentDao{
 
-	final String ns = "";
+	final String ns = "CommentMapper.";
 	
 	@Autowired
 	private SqlSession session;

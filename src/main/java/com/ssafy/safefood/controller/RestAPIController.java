@@ -27,6 +27,8 @@ import com.ssafy.safefood.vo.NoticeVO;
 import com.ssafy.safefood.vo.QnaVO;
 import com.ssafy.safefood.vo.UserVO;
 
+import io.swagger.annotations.Api;
+
 @CrossOrigin
 @RestController
 public class RestAPIController {
@@ -176,7 +178,7 @@ public class RestAPIController {
 		else return new ResponseEntity(rvo, HttpStatus.OK);
 	}
 	
-	@GetMapping("/qna/{no}")
+	@GetMapping("/qnano/{no}")
 	public ResponseEntity selectByQnaNo(@PathVariable int no) throws Exception{
 		System.out.println("qna/no");
 		QnaVO rvo = qnaService.selectByQnaNo(no);
@@ -184,9 +186,9 @@ public class RestAPIController {
 		else return new ResponseEntity(rvo, HttpStatus.OK);
 	}
 	
-	@GetMapping("/qna/{title}")
+	@GetMapping("/qnatitle/{title}")
 	public ResponseEntity selectByQnaTitle(@PathVariable String title) throws Exception{
-		System.out.println("qna");
+		System.out.println("qna/title");
 		List<QnaVO> rvo = qnaService.selectByQnaTitle(title);
 		if(rvo == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(rvo, HttpStatus.OK);
