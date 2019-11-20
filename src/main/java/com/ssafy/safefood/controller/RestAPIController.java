@@ -204,8 +204,10 @@ public class RestAPIController {
 	@PutMapping("/updateqna")
 	public ResponseEntity updateQna(@RequestBody QnaVO vo) throws Exception{
 		System.out.println("updateQna");
+		if(vo==null)return new ResponseEntity(HttpStatus.NO_CONTENT);
+		System.out.println(vo);
 		qnaService.updateQna(vo);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity(true,HttpStatus.OK);
 	}
 	
 	@GetMapping("/deleteqna/{no}")
@@ -227,8 +229,9 @@ public class RestAPIController {
 	@PostMapping("/insertcomment")
 	public ResponseEntity insertComment(@RequestBody CommentVO vo) throws Exception{
 		System.out.println("insertqna");
+		if(vo == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		commentService.insertComment(vo);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity(true,HttpStatus.OK);
 	}
 	
 	@PutMapping("/updatecomment")

@@ -102,7 +102,7 @@
 	                                	<button class="btn btn-secondary search-btn">검색</button>
 	                                </span>
 		                            </div>
-	                            </div>
+	                           </div>
 						</li>
 					</ul>
 				</div>

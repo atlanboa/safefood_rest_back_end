@@ -22,8 +22,8 @@
 	
 	
 	<insert id="insertQna" parameterType="QnaVO" useGeneratedKeys="true" keyProperty="no">
-		INSERT INTO qna (title, content, writer, hit, time)
-		VALUES ( #{title}, #{content}, #{writer}, #{hit}, #{time})
+		INSERT INTO qna (title, content, writer, hit)
+		VALUES ( #{title}, #{content}, #{writer}, #{hit})
 	</insert>
 	
 	<update id="updateQna" parameterType="QnaVO">
