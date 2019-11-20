@@ -192,7 +192,7 @@
 				html+="<td>"+userIngestion[i].name+"</td>";
 				html+="<td>"+userIngestion[i].maker+"</td>";
 				html+="<td>"+userIngestion[i].quantity+"</td>";
-				html+="<td><button   id='deleteCart' value='"+userIngestion[i].code+"'>삭제</button><td>";
+				html+="<td><button class='btn btn-secondary' id='deleteCart' value='"+userIngestion[i].code+"'>삭제</button><td>";
 				html+="</tr>";
 			}
 			$("#jjimList").append(html);

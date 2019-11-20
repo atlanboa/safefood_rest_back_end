@@ -11,6 +11,9 @@
 			font-size: 3.5rem;
 		}
 	}
+	nav a:hover{
+		background-color:color name !important;
+	}
 	</style>
 	<script>
 	$(function() {
@@ -51,14 +54,14 @@
 									<input type="password" class="form-control" name="pass" id="password" required><br> <br> 
 									<input type="button" class="btn btn-light" value="로 그 인" id="login" style="width:100%;">
 								</form>
-								<a class="btn btn-dark" href="${pageContext.request.contextPath}/user/passSearch.jsp">비밀번호 찾기</a>
+								<a class="btn btn-dark" href="#">비밀번호 찾기</a>
 							</div>
 						</div>
 					</li>
 					</c:when>
 					<c:otherwise>
 					<li class="nav-item logoutList">
-						<a class="nav-link" href="${pageContext.request.contextPath}/UserServlet?command=list"><i class="fas fa-users"></i>회원리스트</a>
+						<a class="nav-link" href="#"><i class="fas fa-users"></i>회원리스트</a>
 					</li>
 					<li class="nav-item logoutList">
 						<a class="nav-link" href="" id="logout"><i class="fas fa-lock-open"></i>LogOut</a>
@@ -114,7 +117,6 @@
 		var userVO ={};
 		userVO.id = id;
 		userVO.pass = pass;
-		alert(userVO.id+" "+userVO.pass);
 		$.ajax({
 			url : ${pageContext.request.contextPath}"/login",
 			type : "post",
@@ -132,7 +134,7 @@
 		$.ajax({
 			url:${pageContext.request.contextPath}"/logout",
 			success : function(resData) {
-				location.href=${pageContext.request.contextPath}"index.jsp";
+				location.href=${pageContext.request.contextPath}"/index.jsp";
 			},error : function() {
 				alert("로그아웃 오류")
 			}

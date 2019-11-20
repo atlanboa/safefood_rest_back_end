@@ -85,9 +85,10 @@ public class RestAPIController {
 
 	}
 	@PostMapping("/updateUser")
-	public ResponseEntity updateUser(@RequestBody UserVO user) throws Exception{
+	public ResponseEntity updateUser(@RequestBody UserVO user, HttpSession session) throws Exception{
 		System.out.println(user);
 		userService.updateUser(user);
+		session.setAttribute("user", user);
 		return new ResponseEntity(HttpStatus.OK);
 
 	}

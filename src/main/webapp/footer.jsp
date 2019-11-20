@@ -57,7 +57,7 @@
 						<li><a href="#">공지사항</a></li>
 						<li><a href="#">자료실</a></li>
 						<li><a href="#">QnA</a></li>
-						<li><a class='logoutList' href="${pageContext.request.contextPath}/UserServlet?command=view">회원정보</a></li>
+						<li><a class='logoutList' href="${pageContext.request.contextPath}/user/userInfo.jsp">회원정보</a></li>
 					</ul>
 				</div>
 				<!-- Grid column -->

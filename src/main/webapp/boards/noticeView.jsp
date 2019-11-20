@@ -62,6 +62,9 @@
 				url : ${pageContext.request.contextPath}"/noticeDelete/"+params.no,
 				type : "get",
 				success : function(resData){
+					if(!confirm("정말 삭제 하시겠습니까?")){
+						return false;
+					}
 					alert("삭제완료");
 					location.href=${pageContext.request.contextPath}"/boards/noticeBoard.jsp";
 				},//success
@@ -105,7 +108,7 @@
 			</tbody>
 		</table>
 		<input type="button" class="btn btn-outline-primary" value="수정" id="update"/>
-		<input type="button" class="btn btn-outline-dange" value="삭제" id="delete"/>
+		<input type="button" class="btn btn-outline-danger" value="삭제" id="delete"/>
 	</article>
 </section>
 <c:import url="${pageContext.request.contextPath}/footer.jsp"></c:import>
