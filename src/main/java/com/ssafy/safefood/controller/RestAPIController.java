@@ -7,19 +7,25 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.safefood.dao.QnaDao;
 import com.ssafy.safefood.service.FoodService;
 import com.ssafy.safefood.service.NoticeService;
+import com.ssafy.safefood.service.QnaService;
 import com.ssafy.safefood.service.UserService;
 import com.ssafy.safefood.vo.FoodVO;
 import com.ssafy.safefood.vo.NoticeVO;
+import com.ssafy.safefood.vo.QnaVO;
 import com.ssafy.safefood.vo.UserVO;
 
+@CrossOrigin
 @RestController
 public class RestAPIController {
 
@@ -31,6 +37,9 @@ public class RestAPIController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
+	@Autowired
+	private QnaService qnaService;
 	
 	@GetMapping("search/{category}")
 	public ResponseEntity<List<FoodVO>> search(@PathVariable String category)throws Exception{
@@ -150,6 +159,51 @@ public class RestAPIController {
 	public ResponseEntity noticeDelete(@PathVariable int no) throws Exception{
 		System.out.println(no);
 		noticeService.deleteNotice(no);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@GetMapping("/qna")
+	public ResponseEntity selectAllQna() throws Exception{
+		System.out.println("qna");
+		List<QnaVO> rvo = qnaService.selectAll();
+		if(rvo == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
+		else return new ResponseEntity(rvo, HttpStatus.OK);
+	}
+	
+	@GetMapping("/qna/{no}")
+	public ResponseEntity selectByQnaNo(@PathVariable int no) throws Exception{
+		System.out.println("qna/no");
+		QnaVO rvo = qnaService.selectByQnaNo(no);
+		if(rvo == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
+		else return new ResponseEntity(rvo, HttpStatus.OK);
+	}
+	
+	@GetMapping("/qna/{title}")
+	public ResponseEntity selectByQnaTitle(@PathVariable String title) throws Exception{
+		System.out.println("qna");
+		List<QnaVO> rvo = qnaService.selectByQnaTitle(title);
+		if(rvo == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
+		else return new ResponseEntity(rvo, HttpStatus.OK);
+	}
+	
+	@PostMapping("/insertqna")
+	public ResponseEntity insertQna(@RequestBody QnaVO vo) throws Exception{
+		System.out.println("insertqna");
+		qnaService.insertQna(vo);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateqna")
+	public ResponseEntity updateQna(@RequestBody QnaVO vo) throws Exception{
+		System.out.println("updateQna");
+		qnaService.updateQna(vo);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@GetMapping("/deleteqna/{no}")
+	public ResponseEntity selectByQnaTitle(@PathVariable int no) throws Exception{
+		System.out.println("deleteqna");
+		qnaService.deleteQna(no);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QnaMapper">
+	<select id="selectAll" resultType="QnaVO">
+		SELECT no, title, content, writer, hit, time
+		FROM qna
+	</select>
+
+	<select id="selectByQnaNo" parameterType="int" resultType="QnaVO">
+		SELECT no, title, content, writer, hit, time
+		FROM qna
+		WHERE no = #{value}
+	</select>
+	
+	<select id="selectByQnaTitle" parameterType="string" resultType="QnaVO">
+		SELECT no, title, content, writer, hit, time
+		FROM qna
+		WHERE title LIKE '%${value}%' 
+	</select>
+	
+	
+	<insert id="insertQna" parameterType="QnaVO" useGeneratedKeys="true" keyProperty="no">
+		INSERT INTO qna (title, content, writer, hit, time)
+		VALUES ( #{title}, #{content}, #{writer}, #{hit}, #{time})
+	</insert>
+	
+	<update id="updateQna" parameterType="QnaVO">
+		UPDATE qna
+		SET title=#{title}, content=#{content}, writer=#{writer}, hit=#{hit}, time=#{time}
+		WHERE no=#{no}
+	</update>
+	
+	<delete id="deleteQna" parameterType="int">
+		DELETE FROM qna
+		WHERE no = #{value}
+	</delete>
+	
+</mapper>
