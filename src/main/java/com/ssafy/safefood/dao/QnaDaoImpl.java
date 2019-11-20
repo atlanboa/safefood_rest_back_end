@@ -36,6 +36,7 @@ public class QnaDaoImpl implements QnaDao{
 	@Override
 	public void insertQna(QnaVO vo) throws Exception {
 		session.insert(ns+"insertQna", vo);
+		System.out.println("QnaDaoImpl "+vo);
 		
 	}
 

@@ -32,6 +32,7 @@ public class QnaServiceImpl implements QnaService{
 
 	@Override
 	public void insertQna(QnaVO vo) throws Exception {
+		System.out.println("QnaDaoImpl "+vo);
 		dao.insertQna(vo);
 	}
 

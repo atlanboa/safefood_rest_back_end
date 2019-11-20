@@ -30,8 +30,8 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public void deleteComment(int no) throws Exception {
-		dao.deleteComment(no);
+	public void deleteComment(int cno) throws Exception {
+		dao.deleteComment(cno);
 	}
 
 }
