@@ -91,6 +91,7 @@
 							<li class="nav-item"><a class="nav-link logoutList" href="${pageContext.request.contextPath}/user/user_Ingestion.jsp">내 섭취 정보</a></li>
 							<li class="nav-item"><a class="nav-link logoutList" href="#">예상 섭취 정보</a></li>	
 						</c:if>
+						<li class="nav-item"><a class="nav-link" href="http://localhost:9998">QnA</a></li>
 						<li>
 							<div class="search">
 	                            <div class="search-wrap">
