@@ -21,12 +21,12 @@
 		VALUES(#{no}, #{content})
 	</insert>
 	
-	<update id="updateComment" parameterMap="CommentVO">
+	<update id="updateComment" parameterType="CommentVO">
 		UPDATE comment
 		SET content = #{content}
 	</update>
 	
-	<delete id="deleteComment" parameterMap="int">
+	<delete id="deleteComment" parameterType="int">
 		DELETE FROM comment
 		WHERE no = #{value}
 	</delete>

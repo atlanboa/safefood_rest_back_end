@@ -108,7 +108,6 @@
 				phone:$("#phone").val(),
 				allergy:allergy
 		};
-		alert(userInfo.allergy);
 		$.ajax({
 			url : ${pageContext.request.contextPath}"/updateUser",
 			type : "post",
@@ -135,13 +134,15 @@
 				phone:$("#phone").val(),
 				allergy:allergy
 		};
-		alert(userInfo.id);
 		$.ajax({
 			url : ${pageContext.request.contextPath}"/deleteUser",
 			type : "post",
 			data : JSON.stringify(userInfo),
 			contentType:"application/json",
 			success : function(){
+				if(!confirm("정말 삭제 하시겠습니까?")){
+					return false;
+				}
 				location.href=${pageContext.request.contextPath}"/index.jsp";
 			},
 			error : function(){

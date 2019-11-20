@@ -198,12 +198,12 @@
 				</fieldset>
 				</div><br><br><br><br>
 				
-				<div class="container-fluid">
+				<div class="container">
 					<div class="row">
-						<div class="col-sm-6" id="graph" style="min-width: 410px; height: 500px; max-width: 600px; margin-left: 100px; float:left">
+						<div class="col-sm-8" id="graph" style="float:left">
 						<!-- 원형 그래프 -->
 						</div>
-						<div class="col-sm-6" style="float:left" id="foodMaterial">
+						<div class="col-sm-4" style="float:left" id="foodMaterial">
 						</div>
 					</div>
 				</div>

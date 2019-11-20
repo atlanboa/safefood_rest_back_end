@@ -124,9 +124,9 @@
 						}else if(idx%3==2){
 							str+='<div class="col-sm-4 right">';
 						}
-						str+='<div class="info" onclick="forViewPage('+food.code+')">';
-						str+='<img src="'+food.img+'" style="width: 50%; height: 50%;">';
-						str+='<p class="text">'+food.name+'<br>'+food.maker+'</p>';
+						str+='<div class="info text-center" onclick="forViewPage('+food.code+')">';
+						str+='<img src="'+food.img+'" style="width: 60%; height: 60%;">';
+						str+='<p class="text text-center">'+food.name+'<br>'+food.maker+'</p>';
 						str+='</div></div>';
 					});//each
 					$("#foodList").html(str);

@@ -54,6 +54,7 @@
 <c:import url="${pageContext.request.contextPath}/header.jsp"></c:import>
 <section>
 	<article class="container">
+		<br>
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -71,7 +72,9 @@
 			<li class="page-item"><a class="page-link" href="#">3</a></li>
 			<li class="page-item"><a class="page-link" href="#">Next</a></li>
 		</ul>
-		<input type="button" id="noticeWriter" value="글쓰기"/>
+		<c:if test="${not empty user}">
+			<input class="btn btn-primary" type="button" id="noticeWriter" value="글쓰기"/>
+		</c:if>
 	</article>
 </section>
 <c:import url="${pageContext.request.contextPath}/footer.jsp"></c:import>

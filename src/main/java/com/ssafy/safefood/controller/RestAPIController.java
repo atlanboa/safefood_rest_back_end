@@ -28,6 +28,8 @@ import com.ssafy.safefood.vo.NoticeVO;
 import com.ssafy.safefood.vo.QnaVO;
 import com.ssafy.safefood.vo.UserVO;
 
+import io.swagger.annotations.Api;
+
 @CrossOrigin
 @RestController
 //@RequestMapping("/api")
@@ -101,9 +103,10 @@ public class RestAPIController {
 
 	}
 	@PostMapping("/updateUser")
-	public ResponseEntity updateUser(@RequestBody UserVO user) throws Exception{
+	public ResponseEntity updateUser(@RequestBody UserVO user, HttpSession session) throws Exception{
 		System.out.println(user);
 		userService.updateUser(user);
+		session.setAttribute("user", user);
 		return new ResponseEntity(HttpStatus.OK);
 
 	}
@@ -177,7 +180,7 @@ public class RestAPIController {
 		else return new ResponseEntity(rvo, HttpStatus.OK);
 	}
 	
-	@GetMapping("/qna/{no}")
+	@GetMapping("/qnano/{no}")
 	public ResponseEntity selectByQnaNo(@PathVariable int no) throws Exception{
 		System.out.println("qna/no");
 		QnaVO rvo = qnaService.selectByQnaNo(no);
@@ -185,9 +188,9 @@ public class RestAPIController {
 		else return new ResponseEntity(rvo, HttpStatus.OK);
 	}
 	
-	@GetMapping("/qna/{title}")
+	@GetMapping("/qnatitle/{title}")
 	public ResponseEntity selectByQnaTitle(@PathVariable String title) throws Exception{
-		System.out.println("qna");
+		System.out.println("qna/title");
 		List<QnaVO> rvo = qnaService.selectByQnaTitle(title);
 		if(rvo == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(rvo, HttpStatus.OK);
@@ -203,8 +206,10 @@ public class RestAPIController {
 	@PutMapping("/updateqna")
 	public ResponseEntity updateQna(@RequestBody QnaVO vo) throws Exception{
 		System.out.println("updateQna");
+		if(vo==null)return new ResponseEntity(HttpStatus.NO_CONTENT);
+		System.out.println(vo);
 		qnaService.updateQna(vo);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity(true,HttpStatus.OK);
 	}
 	
 	@GetMapping("/deleteqna/{no}")
@@ -226,8 +231,9 @@ public class RestAPIController {
 	@PostMapping("/insertcomment")
 	public ResponseEntity insertComment(@RequestBody CommentVO vo) throws Exception{
 		System.out.println("insertqna");
+		if(vo == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		commentService.insertComment(vo);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity(true,HttpStatus.OK);
 	}
 	
 	@PutMapping("/updatecomment")

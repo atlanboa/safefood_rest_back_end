@@ -17,7 +17,7 @@
 <div class="container">
 	<div style="text-align: center;">
 		<h1>ERROR 404</h1>
-		<a class="btn btn-outline-primary" href="index.jsp">메인 페이지로</a>
+		<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/index.jsp">메인 페이지로</a>
 	</div>
 </div>
 <c:import url="${pageContext.request.contextPath}/footer.jsp"></c:import>
