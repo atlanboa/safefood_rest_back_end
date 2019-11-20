@@ -230,7 +230,7 @@ public class RestAPIController {
 	
 	@PostMapping("/insertcomment")
 	public ResponseEntity insertComment(@RequestBody CommentVO vo) throws Exception{
-		System.out.println("insertqna");
+		System.out.println("insertqna"+ vo);
 		if(vo == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		commentService.insertComment(vo);
 		return new ResponseEntity(true,HttpStatus.OK);
