@@ -17,7 +17,7 @@
 	<select id="selectByQnaTitle" parameterType="string" resultType="QnaVO">
 		SELECT no, title, content, writer, hit, time
 		FROM qna
-		WHERE title LIKE '%${value}%' 
+		WHERE title LIKE '%${value}%' OR content LIKE '%${value}%' 
 	</select>
 	
 	
