@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="CommentMapper">
+
+	<sql id="select">
+		SELECT
+		no, content
+		FROM comment
+	</sql>
+
+	<select id="selectByNo" parameterType="int" resultType="CommentVO">
+		<include refid="select"></include>
+		WHERE no = #{value}
+	</select>
+	
+	<insert id="insertComment" parameterType="CommentVO">
+		INSERT INTO comment (no, content)
+		VALUES(#{no}, #{content})
+	</insert>
+	
+	<update id="updateComment" parameterMap="CommentVO">
+		UPDATE comment
+		SET content = #{content}
+	</update>
+	
+	<delete id="deleteComment" parameterMap="int">
+		DELETE FROM comment
+		WHERE no = #{value}
+	</delete>
+
+	
+</mapper>
