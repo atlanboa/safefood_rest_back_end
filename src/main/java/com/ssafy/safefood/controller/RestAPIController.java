@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.safefood.dao.QnaDao;
@@ -31,6 +32,7 @@ import io.swagger.annotations.Api;
 
 @CrossOrigin
 @RestController
+//@RequestMapping("/api")
 public class RestAPIController {
 
 	@Autowired
@@ -198,7 +200,7 @@ public class RestAPIController {
 	public ResponseEntity insertQna(@RequestBody QnaVO vo) throws Exception{
 		System.out.println("insertqna");
 		qnaService.insertQna(vo);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity(true, HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateqna")
@@ -207,7 +209,7 @@ public class RestAPIController {
 		if(vo==null)return new ResponseEntity(HttpStatus.NO_CONTENT);
 		System.out.println(vo);
 		qnaService.updateQna(vo);
-		return new ResponseEntity(true,HttpStatus.OK);
+		return new ResponseEntity(true, HttpStatus.OK);
 	}
 	
 	@GetMapping("/deleteqna/{no}")
@@ -241,11 +243,11 @@ public class RestAPIController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
-	@GetMapping("/deletecomment/{no}")
-	public ResponseEntity deleteComment(@PathVariable int no) throws Exception{
+	@GetMapping("/deletecomment/{cno}")
+	public ResponseEntity deleteComment(@PathVariable int cno) throws Exception{
 		System.out.println("deleteComment");
-		commentService.deleteComment(no);
-		return new ResponseEntity(HttpStatus.OK);
+		commentService.deleteComment(cno);
+		return new ResponseEntity(true, HttpStatus.OK);
 	}
 
 }

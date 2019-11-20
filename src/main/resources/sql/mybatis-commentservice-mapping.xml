@@ -7,7 +7,7 @@
 
 	<sql id="select">
 		SELECT
-		no, content
+		cno, no, content
 		FROM comment
 	</sql>
 
@@ -16,7 +16,7 @@
 		WHERE no = #{value}
 	</select>
 	
-	<insert id="insertComment" parameterType="CommentVO">
+	<insert id="insertComment" parameterType="CommentVO" useGeneratedKeys="true" keyProperty="cno">
 		INSERT INTO comment (no, content)
 		VALUES(#{no}, #{content})
 	</insert>
@@ -28,7 +28,7 @@
 	
 	<delete id="deleteComment" parameterType="int">
 		DELETE FROM comment
-		WHERE no = #{value}
+		WHERE cno = #{value}
 	</delete>
 
 	

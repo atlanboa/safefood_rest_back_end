@@ -32,8 +32,8 @@ public class CommentDaoImpl implements CommentDao{
 	}
 
 	@Override
-	public void deleteComment(int no) throws Exception {
-		session.delete(ns+"deleteComment", no);	
+	public void deleteComment(int cno) throws Exception {
+		session.delete(ns+"deleteComment", cno);	
 	}
 
 }
