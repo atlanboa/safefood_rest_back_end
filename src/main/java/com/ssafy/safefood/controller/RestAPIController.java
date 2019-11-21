@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.safefood.dao.QnaDao;
 import com.ssafy.safefood.service.CommentService;
 import com.ssafy.safefood.service.FoodService;
 import com.ssafy.safefood.service.NoticeService;
@@ -27,8 +26,6 @@ import com.ssafy.safefood.vo.FoodVO;
 import com.ssafy.safefood.vo.NoticeVO;
 import com.ssafy.safefood.vo.QnaVO;
 import com.ssafy.safefood.vo.UserVO;
-
-import io.swagger.annotations.Api;
 
 @CrossOrigin
 @RestController
