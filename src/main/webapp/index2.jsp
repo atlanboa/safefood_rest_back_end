@@ -16,10 +16,10 @@
 <c:import url="${pageContext.request.contextPath}/header2.jsp"></c:import>
 <section>
 
+<!-- <iframe src="index.html" frameborder="0" width="100%" height="100%" marginwidth="0" marginheight="0" scrolling="no"></iframe> -->
 <c:import url="index.html"></c:import>
 
 </section>
-<c:import url="${pageContext.request.contextPath}/footer2.jsp"></c:import>
 </body>
 <script type="text/javascript">
 	

@@ -29,7 +29,7 @@ import com.ssafy.safefood.vo.UserVO;
 
 @CrossOrigin
 @RestController
-//@RequestMapping("/api")
+@RequestMapping("/api")
 public class RestAPIController {
 
 	@Autowired
