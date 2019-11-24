@@ -21,11 +21,13 @@ import com.ssafy.safefood.service.FoodService;
 import com.ssafy.safefood.service.NoticeService;
 import com.ssafy.safefood.service.QnaService;
 import com.ssafy.safefood.service.UserService;
+import com.ssafy.safefood.service.UserintakeService;
 import com.ssafy.safefood.vo.CommentVO;
 import com.ssafy.safefood.vo.FoodVO;
 import com.ssafy.safefood.vo.NoticeVO;
 import com.ssafy.safefood.vo.QnaVO;
 import com.ssafy.safefood.vo.UserVO;
+import com.ssafy.safefood.vo.UserintakeVO;
 
 @CrossOrigin
 @RestController
@@ -46,6 +48,9 @@ public class RestAPIController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private UserintakeService userintakeservice;
 	
 	@GetMapping("search/{category}")
 	public ResponseEntity<List<FoodVO>> search(@PathVariable String category)throws Exception{
@@ -245,6 +250,16 @@ public class RestAPIController {
 		System.out.println("deleteComment");
 		commentService.deleteComment(cno);
 		return new ResponseEntity(true, HttpStatus.OK);
+	}
+	
+	@PostMapping("/daydetail")
+	public ResponseEntity getUserIntake(@RequestBody UserintakeVO vo) throws Exception{
+		System.out.println("daydetail"+ vo);
+		
+		List<UserintakeVO> list = userintakeservice.getUserIntake(vo);
+		
+		if(list == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
+		return new ResponseEntity(list ,HttpStatus.OK);
 	}
 
 }
