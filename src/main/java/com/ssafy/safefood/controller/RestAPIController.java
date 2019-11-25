@@ -261,5 +261,29 @@ public class RestAPIController {
 		if(list == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
 		return new ResponseEntity(list ,HttpStatus.OK);
 	}
+	
+	@PostMapping("/daydetail/insert")
+	public ResponseEntity insertUserIntake(@RequestBody List<UserintakeVO> list) throws Exception{
+		System.out.println("insertUserIntake");
+		userintakeservice.insertUserIntake(list);
+		if(list == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
+		return new ResponseEntity(true ,HttpStatus.OK);
+	}
+	
+	@PostMapping("/daydetail/delete")
+	public ResponseEntity deleteUserIntake(@RequestBody UserintakeVO vo) throws Exception{
+		System.out.println("deleteUserIntake");
+		userintakeservice.deleteUserIntake(vo);
+		if(vo == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
+		return new ResponseEntity(true ,HttpStatus.OK);
+	}
+	
+	@PostMapping("/daydetail/update")
+	public ResponseEntity updateUserIntake(@RequestBody UserintakeVO vo) throws Exception{
+		System.out.println("updateUserIntake");
+		userintakeservice.updateUserIntake(vo);
+		if(vo == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
+		return new ResponseEntity(true ,HttpStatus.OK);
+	}
 
 }

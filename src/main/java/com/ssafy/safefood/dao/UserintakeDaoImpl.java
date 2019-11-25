@@ -21,6 +21,23 @@ public class UserintakeDaoImpl implements UserintakeDao{
 		return session.selectList(ns+"getUserIntake");
 	}
 
+	@Override
+	public void insertUserIntake(List<UserintakeVO> list) throws Exception {
+		for(UserintakeVO v : list) {
+			session.insert(ns+"insertUserIntake", v);
+		}
+	}
+
+	@Override
+	public void deleteUserIntake(UserintakeVO vo) throws Exception {
+		session.delete(ns+"deleteUserIntake", vo);
+	}
+
+	@Override
+	public void updateUserIntake(UserintakeVO vo) throws Exception {
+		session.update(ns+"updateUserIntake", vo);
+	}
+
 	
 	
 }

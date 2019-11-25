@@ -21,4 +21,19 @@ public class UserintakeServiceImpl implements UserintakeService{
 		return dao.getUserIntake(vo);
 	}
 
+	@Override
+	public void insertUserIntake(List<UserintakeVO> list) throws Exception {
+		dao.insertUserIntake(list);
+	}
+
+	@Override
+	public void deleteUserIntake(UserintakeVO vo) throws Exception {
+		dao.deleteUserIntake(vo);
+	}
+
+	@Override
+	public void updateUserIntake(UserintakeVO vo) throws Exception {
+		dao.updateUserIntake(vo);
+	}
+
 }
