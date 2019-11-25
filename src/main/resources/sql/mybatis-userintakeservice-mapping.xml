@@ -4,15 +4,14 @@
 
 <mapper namespace="UserIntakeMapper">
 
-	<select id="getUserIntake" parameterType="userintakeVO"
-		resultType="userintakeVO">
-		SELECT
-		a.no, a.id, a.code, a.count, a.time,
-		b.img, b.supportpereat, b.calory, b.carbo, b.protein,
-		b.fat, b.sugar, b.natrium, b.chole, b.fattyacid, b.transfat
-		FROM user_intake a JOIN food b
-		ON a.code = b.code
-		WHERE a.id = #{id} and a.time LIKE '${time}%'
+	<select id="getUserIntake" parameterType="userintakeVO"	resultType="userintakeVO">
+			SELECT
+			a.no, a.id, a.code, a.count, a.time, 
+			b.img, b.supportpereat, b.calory, b.carbo, b.protein,
+			b.fat, b.sugar, b.natrium, b.chole, b.fattyacid, b.transfat
+			FROM user_intake a JOIN food b
+			ON a.code = b.code
+			WHERE a.id = #{id} and a.time LIKE '${time}%';
 	</select>
 
 	<insert id="insertUserIntake" parameterType="userintakeVO" useGeneratedKeys="true" keyProperty="no">

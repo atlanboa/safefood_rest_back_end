@@ -254,7 +254,7 @@ public class RestAPIController {
 	
 	@PostMapping("/daydetail")
 	public ResponseEntity getUserIntake(@RequestBody UserintakeVO vo) throws Exception{
-		System.out.println("daydetail"+ vo);
+		System.out.println("getUserIntake"+ vo);
 		
 		List<UserintakeVO> list = userintakeservice.getUserIntake(vo);
 		

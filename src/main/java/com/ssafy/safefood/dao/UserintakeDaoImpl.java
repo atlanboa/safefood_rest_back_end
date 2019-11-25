@@ -18,7 +18,12 @@ public class UserintakeDaoImpl implements UserintakeDao{
 	
 	@Override
 	public List<UserintakeVO> getUserIntake(UserintakeVO vo) throws Exception {
-		return session.selectList(ns+"getUserIntake");
+		
+		List<UserintakeVO> list = session.selectList(ns+"getUserIntake", vo);
+//		for(UserintakeVO v : list) {
+//			System.out.println("DAO ::::::::::: "+v);
+//		}
+		return list;
 	}
 
 	@Override
