@@ -43,6 +43,12 @@ public class UserintakeDaoImpl implements UserintakeDao{
 		session.update(ns+"updateUserIntake", vo);
 	}
 
+	@Override
+	public List<UserintakeVO> getAllUserIntake(String id) throws Exception {
+		
+		return session.selectList(ns+"getAllUserIntake", id);
+	}
+
 	
 	
 }

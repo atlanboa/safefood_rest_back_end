@@ -285,5 +285,19 @@ public class RestAPIController {
 		if(vo == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
 		return new ResponseEntity(true ,HttpStatus.OK);
 	}
+	
+	
+	@GetMapping("/cart/{id}")
+	public ResponseEntity getAllUserIntake(@PathVariable String id) throws Exception{
+		System.out.println("cart/{id} in");
+		List<UserintakeVO> list = userintakeservice.getAllUserIntake(id);
+		for(UserintakeVO v : list) {
+			System.out.println(v);
+		}
+		if(list == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
+		return new ResponseEntity(list ,HttpStatus.OK);
+	}
+
+	
 
 }

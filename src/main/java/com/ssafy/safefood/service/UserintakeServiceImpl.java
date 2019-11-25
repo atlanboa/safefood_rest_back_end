@@ -36,4 +36,9 @@ public class UserintakeServiceImpl implements UserintakeService{
 		dao.updateUserIntake(vo);
 	}
 
+	@Override
+	public List<UserintakeVO> getAllUserIntake(String id) throws Exception {
+		return dao.getAllUserIntake(id);
+	}
+
 }

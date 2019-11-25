@@ -4,6 +4,13 @@
 
 <mapper namespace="UserIntakeMapper">
 
+	<select id="getAllUserIntake" parameterType="string" resultType="userintakeVO">
+		SELECT
+		no, id, code, count, DATE_FORMAT(time, '%H') time
+		FROM user_intake
+		WHERE id = #{value} 
+	</select> 
+
 	<select id="getUserIntake" parameterType="userintakeVO"	resultType="userintakeVO">
 			SELECT
 			a.no, a.id, a.code, a.count, a.time, 
