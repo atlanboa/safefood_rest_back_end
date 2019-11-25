@@ -32,7 +32,7 @@ import io.swagger.annotations.Api;
 
 @CrossOrigin
 @RestController
-//@RequestMapping("/api")
+@RequestMapping("/api")
 public class RestAPIController {
 
 	@Autowired
@@ -120,6 +120,7 @@ public class RestAPIController {
 
 	@PostMapping("/login")
 	public ResponseEntity<UserVO> login(@RequestBody UserVO user, HttpSession session) throws Exception{
+		System.out.println("login in");
 		UserVO rvo = userService.login(user);
 		session.setAttribute("user", rvo);
 		if(rvo == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
