@@ -14,5 +14,6 @@
 		<mapper resource="sql/mybatis-noticeservice-mapping.xml"/>
 		<mapper resource="sql/mybatis-qnaservice-mapping.xml"/>
 		<mapper resource="sql/mybatis-commentservice-mapping.xml"/>
+		<mapper resource="sql/mybatis-userintakeservice-mapping.xml"/>
 	</mappers>
 </configuration>

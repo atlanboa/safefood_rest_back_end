@@ -3,6 +3,12 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="UserIntakeMapper">
+	
+	<select id="getAllUserIntake" parameterType="string" resultType="userintakeVO">
+		select no, id, code, count, DATE_FORMAT(time,  '%H') time
+		from user_intake
+		where id = #{value}
+	</select>
 
 	<select id="getUserIntake" parameterType="userintakeVO"
 		resultType="userintakeVO">

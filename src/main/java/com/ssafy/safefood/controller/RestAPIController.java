@@ -287,5 +287,37 @@ public class RestAPIController {
 		if(vo == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
 		return new ResponseEntity(true ,HttpStatus.OK);
 	}
+	
+	@GetMapping("/cart/{id}")
+	public ResponseEntity getAllUserIntake(@PathVariable String id) throws Exception{
+		System.out.println("getAllUserIntake : "+ id);
+		List<UserintakeVO> list = userintakeservice.getAllUserIntake(id);
+		
+		int[] time = new int[24];
+		
+		for(UserintakeVO v : list) {
+			
+			int index = Integer.parseInt(v.getTime());
+			
+			time[(index-2)<0?(24+(index-2)):(index-2)]++;
+			time[(index-1)<0?(24+(index-1)):(index-1)]++;
+			time[index]++;
+			time[((index+1)%24)]++;
+			time[((index+2)%24)]++;
+		}
+		
+		int maxIdx = 0;
+		for(int i=0; i<24; i++) {
+			if(time[maxIdx] < time[i]) {
+				maxIdx = i;
+			}
+		}
+		
+		
+		if(list == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
+		return new ResponseEntity(maxIdx ,HttpStatus.OK);
+	}
+	
+	
 
 }
