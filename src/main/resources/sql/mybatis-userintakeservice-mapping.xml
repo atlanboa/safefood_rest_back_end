@@ -35,6 +35,7 @@
 		<if test="count != null">
 			UPDATE user_intake
 			SET count = #{count}
+			WHERE no = #{no}
 		</if>
 	</update>
 </mapper>
