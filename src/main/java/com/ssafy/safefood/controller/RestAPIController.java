@@ -93,6 +93,7 @@ public class RestAPIController {
 	public ResponseEntity<FoodVO> selectByFoodCode(@PathVariable String code) throws Exception{
 		System.out.println(code);
 		FoodVO rvo = foodService.selectByFoodCode(code);
+		System.out.println(rvo);
 		if(rvo == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(rvo, HttpStatus.OK);
 	}
@@ -122,6 +123,7 @@ public class RestAPIController {
 
 	@PostMapping("/login")
 	public ResponseEntity<UserVO> login(@RequestBody UserVO user, HttpSession session) throws Exception{
+		System.out.println("login");
 		UserVO rvo = userService.login(user);
 		session.setAttribute("user", rvo);
 		if(rvo == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -286,9 +288,7 @@ public class RestAPIController {
 		return new ResponseEntity(true ,HttpStatus.OK);
 	}
 	
-	
 
-	
 	@GetMapping("/cart/{id}")
 	public ResponseEntity getAllUserIntake(@PathVariable String id) throws Exception{
 		System.out.println("getAllUserIntake : "+ id);
