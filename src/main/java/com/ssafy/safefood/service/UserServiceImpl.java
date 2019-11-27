@@ -1,5 +1,7 @@
 package com.ssafy.safefood.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserVO login(UserVO user) throws Exception {
 		return dao.login(user);
+	}
+
+	@Override
+	public List<UserVO> getAllUser() throws Exception {
+		return dao.getAllUser();
 	}
 
 }

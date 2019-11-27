@@ -9,6 +9,10 @@
 		id, pass, name, address, phone, allergy
 		FROM userInfo
 	</sql>
+	
+	<select id="getAllUser">
+		<include refid="select"></include>
+	</select>
 
 	<insert id="insertUser" parameterType="userVO">
 		INSERT INTO userInfo (id, pass, name, address, phone, allergy)

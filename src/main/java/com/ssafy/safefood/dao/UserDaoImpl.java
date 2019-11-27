@@ -37,5 +37,10 @@ public class UserDaoImpl implements UserDao{
 		return session.selectOne(ns+"login", user);		
 	}
 
+	@Override
+	public List<UserVO> getAllUser() throws Exception {
+		return session.selectList(ns+"getAllUser");
+	}
+
 	
 }

@@ -88,6 +88,14 @@ public class RestAPIController {
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
 
 	}
+	
+	@GetMapping("/getalluser")
+	public ResponseEntity getAllUser() throws Exception{
+		System.out.println("getalluser");
+		List<UserVO> list = userService.getAllUser();
+		if(list == null) return new ResponseEntity(HttpStatus.NO_CONTENT);
+		else return new ResponseEntity(list, HttpStatus.OK);
+	}
 
 	@GetMapping("selectByFoodCode/{code}")
 	public ResponseEntity<FoodVO> selectByFoodCode(@PathVariable String code) throws Exception{
