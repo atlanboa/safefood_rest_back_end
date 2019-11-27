@@ -10,4 +10,7 @@ public interface FoodDao {
 	List<FoodVO> selectByFoodMaker(String maker) throws Exception;
 	List<FoodVO> selectByFoodMaterial(String material) throws Exception;
 	FoodVO selectByFoodCode(String code) throws Exception;
+	void insertFood(FoodVO vo) throws Exception;
+	void updateFood(FoodVO vo) throws Exception;
+	void deleteFood(int code) throws Exception;
 }

@@ -13,3 +13,4 @@ public interface QnaDao {
 	void updateQna(QnaVO vo) throws Exception;
 	void deleteQna(int no) throws Exception;
 }
+

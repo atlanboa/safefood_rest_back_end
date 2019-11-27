@@ -40,4 +40,19 @@ public class FoodServiceImpl implements FoodService{
 		return dao.selectAll();
 	}
 
+	@Override
+	public void insertFood(FoodVO vo) throws Exception {
+		dao.insertFood(vo);
+	}
+
+	@Override
+	public void updateFood(FoodVO vo) throws Exception {
+		dao.updateFood(vo);
+	}
+
+	@Override
+	public void deleteFood(int code) throws Exception {
+		dao.deleteFood(code);
+	}
+
 }

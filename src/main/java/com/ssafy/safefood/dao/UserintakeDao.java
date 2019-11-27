@@ -11,3 +11,4 @@ public interface UserintakeDao {
 	void deleteUserIntake(UserintakeVO vo) throws Exception;
 	void updateUserIntake(UserintakeVO vo) throws Exception;
 }
+

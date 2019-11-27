@@ -1,6 +1,8 @@
 package com.ssafy.safefood.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -86,7 +88,24 @@ public class RestAPIController {
 		}
 
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
-
+	}
+	
+	@PostMapping("/foodinsert")
+	public ResponseEntity<List<FoodVO>> insertFood(@RequestBody FoodVO vo)throws Exception{
+		foodService.insertFood(vo);
+		return new ResponseEntity(true, HttpStatus.OK);
+	}
+	
+	@PostMapping("/foodupdate")
+	public ResponseEntity<List<FoodVO>> updateFood(@RequestBody FoodVO vo)throws Exception{
+		foodService.updateFood(vo);
+		return new ResponseEntity(true, HttpStatus.OK);
+	}
+	
+	@GetMapping("/foodelete/{id}")
+	public ResponseEntity<List<FoodVO>> deleteFood(@PathVariable int code)throws Exception{
+		foodService.deleteFood(code);
+		return new ResponseEntity(true, HttpStatus.OK);
 	}
 	
 	@GetMapping("/getalluser")
@@ -325,6 +344,20 @@ public class RestAPIController {
 		
 		if(list == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
 		return new ResponseEntity(maxIdx ,HttpStatus.OK);
+	}
+	
+	@GetMapping("/cart2/{id}")
+	public ResponseEntity getAllUserIntake2(@PathVariable String id) throws Exception{
+		System.out.println("getAllUserIntake : "+ id);
+		List<UserintakeVO> list = userintakeservice.getAllUserIntake(id);
+		
+		Set<String> set = new HashSet<String>();
+		for(UserintakeVO v : list) {
+			set.add(v.getTime());
+		}
+		
+		if(set == null) return new ResponseEntity(false, HttpStatus.NO_CONTENT);
+		return new ResponseEntity(set ,HttpStatus.OK);
 	}
 	
 	

@@ -46,4 +46,19 @@ public class FoodDaoImpl implements FoodDao {
 
 		return session.selectList(ns+"selectAll");
 	}
+
+	@Override
+	public void insertFood(FoodVO vo) throws Exception {
+		session.insert(ns+"insertFood", vo);
+	}
+
+	@Override
+	public void updateFood(FoodVO vo) throws Exception {
+		session.update(ns+"updateFood", vo);
+	}
+
+	@Override
+	public void deleteFood(int code) throws Exception {
+		session.delete(ns+"deleteFood", code);
+	}
 }

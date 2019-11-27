@@ -13,3 +13,5 @@ public interface UserDao {
 	void deleteUser(UserVO user) throws Exception;
 	UserVO login(UserVO user) throws Exception;
 }
+
+

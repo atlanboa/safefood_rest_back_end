@@ -47,6 +47,20 @@
 	</select>
 
 	<insert id="insertFood" parameterType="foodVO">
-
+		INSERT INTO food (code, name, supportpereat, calory, carbo, protein, fat, sugar, natrium, chole, fattyacid, transfat, maker, material, img, allergy)
+		VALUES (#{code}, #{name}, #{supportpereat}, #{calory}, #{carbo}, #{protein}, #{fat}, #{sugar}, #{natrium}, #{chole}, #{fattyacid}, #{transfat}, #{maker}, #{material}, #{img}, #{allergy})
 	</insert>
+	
+	<update id="updateFood"  parameterType="foodVO">
+		UPDATE food 
+		SET name=#{name}, supportpereat=#{supportpereat}, calory=#{calory}, carbo=#{carbo}, 
+		protein=#{protein}, fat=#{fat}, sugar=#{sugar}, natrium=#{natrium}, chole=#{chole}, fattyacid=#{fattyacid}, 
+		transfat=#{transfat}, maker=#{maker}, material=#{material}, img=#{img}, allergy=#{allergy}
+		WHERE code = #{code}
+	</update>
+	
+	<delete id="deleteFood" parameterType="int">
+		DELETE FROM food
+		WHERE code = #{value}
+	</delete>
 </mapper>
