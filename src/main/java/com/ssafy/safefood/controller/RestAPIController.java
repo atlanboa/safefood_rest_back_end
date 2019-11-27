@@ -102,7 +102,7 @@ public class RestAPIController {
 		return new ResponseEntity(true, HttpStatus.OK);
 	}
 	
-	@GetMapping("/foodelete/{id}")
+	@GetMapping("/foodelete/{code}")
 	public ResponseEntity<List<FoodVO>> deleteFood(@PathVariable int code)throws Exception{
 		foodService.deleteFood(code);
 		return new ResponseEntity(true, HttpStatus.OK);
